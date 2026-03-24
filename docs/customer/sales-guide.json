@@ -20,12 +20,18 @@
     "competitors": [],
 
     "decisionChain": {
-      "decisionMakers": [],
-      "influencers": [],
+      "decisionMakers": [
+        { "name": "叶又生", "title": "董事长", "role": "最终决策" },
+        { "name": "唐兆庆", "title": "总经理", "role": "管理决策" }
+      ],
+      "influencers": [
+        { "name": "胡天明", "title": "总工程师", "role": "技术把关" },
+        { "name": "技术负责人", "title": "技术部门", "role": "方案评估" }
+      ],
       "blockers": [],
-      "decisionProcess": "",
-      "approvalPath": [],
-      "timeline": ""
+      "decisionProcess": "董事会（决策层）→总经理（管理层）→技术/销售/生产负责人（执行层）→部门经理；重大采购需董事会审批，技术方案由技术负责人把关，商务谈判由销售主导。",
+      "approvalPath": ["部门经理", "技术/销售/生产负责人", "总经理", "董事会"],
+      "timeline": "未获取"
     },
 
     "nextActions": [],
