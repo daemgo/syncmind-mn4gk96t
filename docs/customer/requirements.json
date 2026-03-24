@@ -1,5 +1,5 @@
 {
-  "currentVersion": "v0.2",
+  "currentVersion": "v0.3",
   "status": "draft",
   "versions": [
     {
@@ -22,6 +22,18 @@
       "changeSummary": [
         "确认项目时间节点：期望2026年底上线",
         "回答PQ-004问题"
+      ]
+    },
+    {
+      "version": "v0.3",
+      "createdAt": "2026-03-24T00:00:00Z",
+      "trigger": "iteration",
+      "inputSummary": "客户明确EAM覆盖范围：检测设备、生产设备、辅助设备；所有设备具备联网能力，支持MQTT协议",
+      "changeSummary": [
+        "确认EAM管理范围：覆盖检测设备、生产设备、辅助设备",
+        "确认设备技术条件：所有设备具备联网能力，支持MQTT通讯协议",
+        "回答PQ-001、PQ-002问题",
+        "更新REQ-012设备数据采集接口需求，明确MQTT协议支持"
       ]
     }
   ],
@@ -386,8 +398,8 @@
       "nextSteps": ["需求访谈验证必问问题", "现场调研设备现状", "确认系统集成范围", "输出方案对比"]
     },
     "pendingQuestions": [
-      {"id": "PQ-001", "category": "业务", "priority": "必问", "question": "EAM系统的覆盖范围是什么？仅生产设备，还是包括检测设备、辅助设备（叉车、行车）？", "purpose": "明确设备管理范围，影响系统架构", "expectedDirection": "通常包括所有生产相关设备", "targetPerson": "设备部负责人", "relatedNeedIds": ["REQ-002"], "impactIfUnknown": "系统设计范围不清晰", "status": "pending", "answer": "", "answeredAt": ""},
-      {"id": "PQ-002", "category": "技术", "priority": "必问", "question": "设备是否已联网或具备联网条件？PLC型号和通讯协议是什么？", "purpose": "评估OEE自动采集方案的可行性", "expectedDirection": "部分新设备可能已联网", "targetPerson": "设备部/IT部", "relatedNeedIds": ["REQ-007", "REQ-012"], "impactIfUnknown": "OEE方案设计不准确", "status": "pending", "answer": "", "answeredAt": ""},
+      {"id": "PQ-001", "category": "业务", "priority": "必问", "question": "EAM系统的覆盖范围是什么？仅生产设备，还是包括检测设备、辅助设备（叉车、行车）？", "purpose": "明确设备管理范围，影响系统架构", "expectedDirection": "通常包括所有生产相关设备", "targetPerson": "设备部负责人", "relatedNeedIds": ["REQ-002"], "impactIfUnknown": "系统设计范围不清晰", "status": "answered", "answer": "EAM覆盖检测设备、生产设备、辅助设备等", "answeredAt": "2026-03-24"},
+      {"id": "PQ-002", "category": "技术", "priority": "必问", "question": "设备是否已联网或具备联网条件？PLC型号和通讯协议是什么？", "purpose": "评估OEE自动采集方案的可行性", "expectedDirection": "部分新设备可能已联网", "targetPerson": "设备部/IT部", "relatedNeedIds": ["REQ-007", "REQ-012"], "impactIfUnknown": "OEE方案设计不准确", "status": "answered", "answer": "所有设备具备联网能力，支持MQTT通讯协议", "answeredAt": "2026-03-24"},
       {"id": "PQ-003", "category": "技术", "priority": "必问", "question": "现有ERP、MES系统是什么品牌？需要集成哪些数据？", "purpose": "明确集成边界和技术方案", "expectedDirection": "可能有国产ERP（用友/金蝶）或自研MES", "targetPerson": "IT部", "relatedNeedIds": ["REQ-010"], "impactIfUnknown": "集成方案不明确", "status": "pending", "answer": "", "answeredAt": ""},
       {"id": "PQ-004", "category": "时间", "priority": "必问", "question": "期望的系统上线时间？是否分期实施？", "purpose": "影响项目规划和交付节奏", "expectedDirection": "通常6-12个月", "targetPerson": "项目经理/决策层", "relatedNeedIds": [], "impactIfUnknown": "无法制定项目计划", "status": "answered", "answer": "期望2026年底完成项目并上线", "answeredAt": "2026-03-24"},
       {"id": "PQ-005", "category": "预算", "priority": "必问", "question": "倾向于SaaS还是私有化部署？对数据安全有什么要求？", "purpose": "明确部署模式偏好", "expectedDirection": "国有改制企业可能倾向私有化", "targetPerson": "决策层/IT部", "relatedNeedIds": ["REQ-011"], "impactIfUnknown": "方案方向不清晰", "status": "pending", "answer": "", "answeredAt": ""},
