@@ -71,7 +71,8 @@
       "documents": [],
       "communications": [
         {"type": "电话/微信沟通", "date": "2026-03-24", "summary": "客户表达EAM需求，预算100w，考虑SaaS与定制两种方式"},
-        {"type": "电话/微信沟通", "date": "2026-03-24", "summary": "客户期望年底完成项目并上线"}
+        {"type": "电话/微信沟通", "date": "2026-03-24", "summary": "客户期望年底完成项目并上线"},
+        {"type": "电话/微信沟通", "date": "2026-03-24", "summary": "客户确认EAM覆盖范围：检测设备、生产设备、辅助设备；所有设备具备联网能力，支持MQTT通讯协议"}
       ],
       "observations": []
     },
@@ -284,19 +285,22 @@
       {
         "id": "REQ-012",
         "category": "technical",
-        "title": "设备数据采集接口",
-        "description": "支持通过PLC、传感器采集设备运行数据，兼容主流工业协议",
-        "priority": "should",
-        "confidence": "low",
-        "source": {"type": "industry-pattern", "detail": "OEE自动计算需要设备运行数据", "raw": null},
+        "title": "设备数据采集接口（MQTT）",
+        "description": "支持通过MQTT协议采集设备运行数据，所有设备已具备联网能力",
+        "priority": "must",
+        "confidence": "high",
+        "source": {"type": "customer-stated", "detail": "客户确认：所有设备具备联网能力，支持MQTT通讯协议", "raw": "检测设备、生产设备、辅助设备等；这些设备都具备了联网能力，通讯协议都支持MQTT"},
         "status": "active",
         "module": "数据采集",
-        "userStory": "作为IT工程师，我需要采集设备运行数据",
-        "acceptanceCriteria": ["支持OPC UA", "支持Modbus", "支持MQTT"],
-        "relatedPainPoints": [],
+        "userStory": "作为IT工程师，我需要通过MQTT协议采集设备运行数据",
+        "acceptanceCriteria": ["支持MQTT协议接入", "支持设备批量接入", "断线重连机制"],
+        "relatedPainPoints": ["设备OEE数据缺乏系统化管理"],
         "firstVersion": "v0.1",
-        "lastUpdated": "v0.1",
-        "history": []
+        "lastUpdated": "v0.3",
+        "history": [
+          {"version": "v0.1", "change": "初始需求：支持PLC、传感器数据采集"},
+          {"version": "v0.3", "change": "客户确认：所有设备支持MQTT协议，优先级升为must，置信度升为high"}
+        ]
       },
       {
         "id": "REQ-013",
@@ -358,7 +362,7 @@
       {"id": "U-005", "role": "IT管理员", "count": "2-3人", "responsibilities": ["系统运维", "权限管理", "系统集成"], "keyNeeds": ["REQ-010", "REQ-011", "REQ-013"]}
     ],
     "scope": {
-      "inScope": ["设备台账管理", "点检巡检", "预防性维护", "故障维修", "备件管理", "OEE分析"],
+      "inScope": ["设备台账管理（覆盖检测设备、生产设备、辅助设备）", "点检巡检", "预防性维护", "故障维修", "备件管理", "OEE分析", "MQTT设备数据采集"],
       "outOfScope": ["生产排程（MES范围）", "质量管理（QMS范围）"],
       "futureScope": ["预测性维护（IoT传感器）", "AR维修指导", "设备全生命周期成本分析"],
       "phases": [
@@ -384,16 +388,15 @@
     "risksAndAssumptions": {
       "risks": [
         {"risk": "客户在SaaS与定制间摇摆，决策周期可能延长", "impact": "中", "mitigation": "清晰说明两种方案的优劣和适用场景"},
-        {"risk": "设备数据采集基础不足，OEE依赖人工录入", "impact": "高", "mitigation": "前期人工录入为主，逐步推进设备联网"},
         {"risk": "现有ERP/MES老旧，集成困难", "impact": "中", "mitigation": "采用中间文件方式同步，降低集成难度"}
       ],
-      "assumptions": ["客户目前使用Excel或简单台账管理设备", "设备具备一定联网条件", "客户已有ERP和MES系统"],
+      "assumptions": ["客户目前使用Excel或简单台账管理设备", "客户已有ERP和MES系统"],
       "dependencies": ["客户配合需求调研", "现有系统供应商配合集成"]
     },
     "solutionDirection": {
       "overallApproach": "客户在SaaS与定制开发之间权衡，需要根据具体需求匹配度给出建议。100w预算可支持中等复杂度的EAM系统。",
       "recommendedApproach": {"type": "待评估", "rationale": "需先了解客户具体业务场景和个性化需求程度，再判断标准化产品是否满足", "alternatives": [{"type": "成熟SaaS+私有化部署", "benefit": "标准化程度高、上线快、成本低", "drawback": "个性化定制能力有限"}, {"type": "定制开发", "benefit": "完全贴合业务", "drawback": "周期长、成本高、后期维护风险"}]},
-      "technicalDirection": {"architecture": "B/S架构，微服务可选", "deployment": "私有化部署（倾向）或混合云", "techStack": ["Java/.NET", "关系型数据库", "Redis缓存", "可选：微服务"]},
+      "technicalDirection": {"architecture": "B/S架构，微服务可选", "deployment": "私有化部署（倾向）或混合云", "techStack": ["Java/.NET", "关系型数据库", "Redis缓存", "MQTT Broker（EMQX/Mosquitto）", "可选：微服务"]},
       "implementationStrategy": {"approach": "建议分期实施，先核心后外围", "pilotScope": "试点车间或关键设备", "rolloutPlan": "设备台账+维修管理先行，OEE分析后续"},
       "nextSteps": ["需求访谈验证必问问题", "现场调研设备现状", "确认系统集成范围", "输出方案对比"]
     },
@@ -409,6 +412,6 @@
       {"id": "PQ-009", "category": "技术", "priority": "选问", "question": "是否需要与财务系统集成（设备折旧、维修成本）？", "purpose": "评估财务集成需求", "expectedDirection": "通常需要", "targetPerson": "财务部/IT部", "relatedNeedIds": ["REQ-010"], "impactIfUnknown": "财务集成需求遗漏", "status": "pending", "answer": "", "answeredAt": ""},
       {"id": "PQ-010", "category": "业务", "priority": "选问", "question": "是否有特殊合规要求（ISO9001、特种设备管理）？", "purpose": "评估合规功能", "expectedDirection": "可能有ISO9001", "targetPerson": "质量部", "relatedNeedIds": [], "impactIfUnknown": "合规功能缺失", "status": "pending", "answer": "", "answeredAt": ""}
     ],
-    "completionRate": {"overall": 20, "byCategory": {"business": 40, "functional": 10, "technical": 10, "integration": 5, "security": 10, "non-functional": 10}, "blockers": []}
+    "completionRate": {"overall": 30, "byCategory": {"business": 50, "functional": 10, "technical": 25, "integration": 5, "security": 10, "non-functional": 10}, "blockers": []}
   }
 }
