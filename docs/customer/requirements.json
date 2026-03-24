@@ -1,150 +1,391 @@
 {
-  "currentVersion": "",
+  "currentVersion": "v0.1",
   "status": "draft",
-
-  "versions": [],
-
+  "versions": [
+    {
+      "version": "v0.1",
+      "createdAt": "2026-03-24T00:00:00Z",
+      "trigger": "cold-start",
+      "inputSummary": "客户明确表达EAM需求+预算100w+考虑SaaS/定制两种方式",
+      "changeSummary": [
+        "从客户输入提取3条核心需求（EAM系统、预算100w、部署模式权衡）",
+        "基于行业痛点推演10条业务需求",
+        "基于企业特征推演5条技术需求",
+        "生成5个必问+5个选问问题"
+      ]
+    }
+  ],
   "current": {
     "salesInput": {
       "salesPerson": "",
-      "lastUpdated": "",
+      "lastUpdated": "2026-03-24",
       "overallAssessment": {
-        "customerIntent": "",
-        "projectUrgency": "",
-        "budgetSituation": "",
-        "competitionStatus": "",
-        "winProbability": "",
-        "keyObstacles": [],
-        "confidenceLevel": ""
+        "customerIntent": "评估中",
+        "projectUrgency": "不明确",
+        "budgetSituation": "100w左右",
+        "competitionStatus": "不明确",
+        "winProbability": "不明确",
+        "keyObstacles": ["客户在SaaS与定制开发之间权衡"],
+        "confidenceLevel": "低"
       },
       "keyPersons": [],
       "realNeeds": {
-        "explicitNeeds": [],
-        "implicitNeeds": [],
-        "suspectedNeeds": [],
+        "explicitNeeds": ["EAM企业资产管理系统", "预算约100万元", "评估SaaS与定制开发两种方案"],
+        "implicitNeeds": ["设备台账系统化管理", "设备OEE数据分析", "预防性维护能力"],
+        "suspectedNeeds": ["与现有ERP/MES集成", "移动端现场作业支持"],
         "needsNotMentioned": []
       },
       "decisionFactors": {
-        "primaryFactor": "",
-        "secondaryFactors": [],
+        "primaryFactor": "SaaS vs 定制开发的权衡（标准化 vs 个性化）",
+        "secondaryFactors": ["预算控制", "系统集成", "数据安全"],
         "dealBreakers": []
       },
-      "notes": "",
-      "concerns": [],
-      "suggestions": []
+      "notes": "客户处于选型早期评估阶段，在SaaS和定制开发之间权衡。100w预算属于中型EAM项目，有方案设计空间。",
+      "concerns": ["客户可能在SaaS与定制之间摇摆，需要清晰的价值说明"],
+      "suggestions": ["建议先了解客户具体业务场景，判断标准化产品是否满足核心需求"]
     },
-
     "sources": {
       "meetings": [],
       "documents": [],
-      "communications": [],
+      "communications": [
+        {"type": "电话/微信沟通", "date": "2026-03-24", "summary": "客户表达EAM需求，预算100w，考虑SaaS与定制两种方式"}
+      ],
       "observations": []
     },
-
     "background": {
-      "businessContext": "",
-      "currentChallenges": [],
-      "triggerEvent": "",
-      "currentSystems": [],
+      "businessContext": "齿轮加工机床制造商，员工500余人，获数字化转型AAA级认证，现有信息化基础较好，需要EAM系统提升设备管理水平",
+      "currentChallenges": ["设备OEE数据缺乏系统化管理", "预测性维护能力不足", "设备台账可能依赖Excel管理"],
+      "triggerEvent": "客户明确提出EAM需求，预算100w左右",
+      "currentSystems": [
+        {"name": "ERP", "purpose": "推测已部署（数字化转型AAA级）", "status": "待确认"}
+      ],
       "currentProcess": {
-        "overview": "",
+        "overview": "推测：设备台账可能用Excel管理，维修流程可能依赖纸质或简单工单",
         "steps": [],
-        "bottlenecks": []
+        "bottlenecks": ["设备数据分散统计困难", "维修经验缺乏系统沉淀"]
       },
-      "painPoints": [],
-      "expectedOutcomes": []
+      "painPoints": [
+        {"description": "自身生产设备OEE数据缺乏系统化管理", "severity": "中", "source": "profile.json"},
+        {"description": "预测性维护能力不足", "severity": "中", "source": "profile.json"}
+      ],
+      "expectedOutcomes": ["建立完整设备台账", "提升设备OEE可视化水平", "实现预防性维护计划管理"]
     },
-
-    "needs": [],
-
-    "users": [],
-
+    "needs": [
+      {
+        "id": "REQ-001",
+        "category": "business",
+        "title": "EAM企业资产管理系统",
+        "description": "建立企业资产管理系统，实现设备全生命周期管理",
+        "priority": "must",
+        "confidence": "high",
+        "source": {"type": "customer-stated", "detail": "客户直接表述：客户想做EAM", "raw": "客户想做EAM"},
+        "status": "active",
+        "module": "EAM",
+        "userStory": "作为设备管理人员，我需要系统化管理设备资产，以便掌握设备状态和维护历史",
+        "acceptanceCriteria": [],
+        "relatedPainPoints": ["设备OEE数据缺乏系统化管理"],
+        "firstVersion": "v0.1",
+        "lastUpdated": "v0.1",
+        "history": []
+      },
+      {
+        "id": "REQ-002",
+        "category": "functional",
+        "title": "设备台账管理",
+        "description": "建立统一设备台账，记录设备基本信息、技术参数、位置信息、责任人等，支持多维度查询",
+        "priority": "must",
+        "confidence": "low",
+        "source": {"type": "industry-pattern", "detail": "EAM核心基础模块，设备台账是标准功能", "raw": null},
+        "status": "active",
+        "module": "设备台账",
+        "userStory": "作为设备管理员，我需要查看设备完整档案，以便快速获取设备信息",
+        "acceptanceCriteria": ["支持设备分类管理", "支持Excel批量导入导出"],
+        "relatedPainPoints": [],
+        "firstVersion": "v0.1",
+        "lastUpdated": "v0.1",
+        "history": []
+      },
+      {
+        "id": "REQ-003",
+        "category": "functional",
+        "title": "设备点检与巡检",
+        "description": "支持制定点检计划，移动端扫码点检，记录点检结果，异常自动预警",
+        "priority": "must",
+        "confidence": "low",
+        "source": {"type": "profile-inference", "detail": "针对'OEE数据缺乏'痛点，点检是数据采集基础", "raw": null},
+        "status": "active",
+        "module": "点检管理",
+        "userStory": "作为点检员，我需要用手机扫码完成点检，以便及时发现设备异常",
+        "acceptanceCriteria": ["支持点检路线配置", "支持移动端扫码", "异常自动推送"],
+        "relatedPainPoints": ["设备OEE数据缺乏系统化管理"],
+        "firstVersion": "v0.1",
+        "lastUpdated": "v0.1",
+        "history": []
+      },
+      {
+        "id": "REQ-004",
+        "category": "functional",
+        "title": "预防性维护计划",
+        "description": "基于设备类型、运行时间制定预防性维护计划，支持工单生成、执行记录、验收归档",
+        "priority": "must",
+        "confidence": "low",
+        "source": {"type": "profile-inference", "detail": "针对'预测性维护能力不足'痛点，预防性维护是前置基础", "raw": null},
+        "status": "active",
+        "module": "维护管理",
+        "userStory": "作为设备主管，我需要制定维护计划并自动生成工单，以便预防设备故障",
+        "acceptanceCriteria": ["周期性维护计划自动生成工单", "工单闭环管理"],
+        "relatedPainPoints": ["预测性维护能力不足"],
+        "firstVersion": "v0.1",
+        "lastUpdated": "v0.1",
+        "history": []
+      },
+      {
+        "id": "REQ-005",
+        "category": "functional",
+        "title": "故障维修管理",
+        "description": "支持故障报修、工单派发、维修执行、备件领用、维修验收全流程",
+        "priority": "must",
+        "confidence": "low",
+        "source": {"type": "industry-pattern", "detail": "离散制造企业故障处理效率影响OEE，是EAM核心功能", "raw": null},
+        "status": "active",
+        "module": "维修管理",
+        "userStory": "作为维修工，我需要接收工单并记录维修过程，以便沉淀维修经验",
+        "acceptanceCriteria": ["多渠道报修入口", "工单状态流转"],
+        "relatedPainPoints": [],
+        "firstVersion": "v0.1",
+        "lastUpdated": "v0.1",
+        "history": []
+      },
+      {
+        "id": "REQ-006",
+        "category": "functional",
+        "title": "备件库存管理",
+        "description": "管理备件入库、出库、盘点，支持安全库存预警，与维修工单联动",
+        "priority": "should",
+        "confidence": "low",
+        "source": {"type": "industry-pattern", "detail": "齿轮机床备件价值高，库存管理影响维修效率", "raw": null},
+        "status": "active",
+        "module": "备件管理",
+        "userStory": "作为仓管员，我需要管理备件库存，以便维修时快速找到备件",
+        "acceptanceCriteria": ["备件分类编码", "安全库存预警"],
+        "relatedPainPoints": [],
+        "firstVersion": "v0.1",
+        "lastUpdated": "v0.1",
+        "history": []
+      },
+      {
+        "id": "REQ-007",
+        "category": "functional",
+        "title": "设备OEE统计与分析",
+        "description": "采集设备运行数据，计算OEE，支持多维度分析",
+        "priority": "must",
+        "confidence": "low",
+        "source": {"type": "profile-inference", "detail": "痛点明确提及'OEE数据缺乏系统化管理'", "raw": null},
+        "status": "active",
+        "module": "运行分析",
+        "userStory": "作为生产经理，我需要查看设备OEE数据，以便识别效率损失点",
+        "acceptanceCriteria": ["OEE自动计算", "趋势分析", "停机原因分析"],
+        "relatedPainPoints": ["设备OEE数据缺乏系统化管理"],
+        "firstVersion": "v0.1",
+        "lastUpdated": "v0.1",
+        "history": []
+      },
+      {
+        "id": "REQ-008",
+        "category": "functional",
+        "title": "故障分析与MTBF/MTTR统计",
+        "description": "统计故障频次、平均故障间隔时间、平均修复时间",
+        "priority": "should",
+        "confidence": "low",
+        "source": {"type": "profile-inference", "detail": "针对'预测性维护能力不足'痛点，故障分析是基础", "raw": null},
+        "status": "active",
+        "module": "运行分析",
+        "userStory": "作为设备工程师，我需要分析故障数据，以便识别重点改进设备",
+        "acceptanceCriteria": ["MTBF/MTTR自动计算", "故障频次统计"],
+        "relatedPainPoints": ["预测性维护能力不足"],
+        "firstVersion": "v0.1",
+        "lastUpdated": "v0.1",
+        "history": []
+      },
+      {
+        "id": "REQ-009",
+        "category": "functional",
+        "title": "移动端应用",
+        "description": "支持移动端扫码点检、故障报修、工单处理",
+        "priority": "should",
+        "confidence": "low",
+        "source": {"type": "industry-pattern", "detail": "设备现场作业场景普遍需要移动端支持", "raw": null},
+        "status": "active",
+        "module": "移动应用",
+        "userStory": "作为现场操作人员，我需要用手机处理设备相关工作",
+        "acceptanceCriteria": ["扫码快速定位设备", "移动端工单处理"],
+        "relatedPainPoints": [],
+        "firstVersion": "v0.1",
+        "lastUpdated": "v0.1",
+        "history": []
+      },
+      {
+        "id": "REQ-010",
+        "category": "integration",
+        "title": "与现有系统集成",
+        "description": "与ERP、MES系统集成，实现数据共享",
+        "priority": "should",
+        "confidence": "low",
+        "source": {"type": "profile-inference", "detail": "客户已获数字化转型AAA级认证，必有现有系统", "raw": null},
+        "status": "active",
+        "module": "系统集成",
+        "userStory": "作为IT管理员，我需要EAM与现有系统对接",
+        "acceptanceCriteria": ["与ERP集成", "与MES集成", "标准API接口"],
+        "relatedPainPoints": [],
+        "firstVersion": "v0.1",
+        "lastUpdated": "v0.1",
+        "history": []
+      },
+      {
+        "id": "REQ-011",
+        "category": "technical",
+        "title": "私有化部署",
+        "description": "支持私有化本地部署，满足数据安全要求",
+        "priority": "must",
+        "confidence": "medium",
+        "source": {"type": "sales-observation", "detail": "客户在SaaS与定制间权衡，国有改制企业可能倾向私有化", "raw": null},
+        "status": "active",
+        "module": "架构部署",
+        "userStory": "作为IT管理员，我需要系统部署在本地服务器",
+        "acceptanceCriteria": ["支持Linux/Windows部署", "容器化部署"],
+        "relatedPainPoints": [],
+        "firstVersion": "v0.1",
+        "lastUpdated": "v0.1",
+        "history": []
+      },
+      {
+        "id": "REQ-012",
+        "category": "technical",
+        "title": "设备数据采集接口",
+        "description": "支持通过PLC、传感器采集设备运行数据，兼容主流工业协议",
+        "priority": "should",
+        "confidence": "low",
+        "source": {"type": "industry-pattern", "detail": "OEE自动计算需要设备运行数据", "raw": null},
+        "status": "active",
+        "module": "数据采集",
+        "userStory": "作为IT工程师，我需要采集设备运行数据",
+        "acceptanceCriteria": ["支持OPC UA", "支持Modbus", "支持MQTT"],
+        "relatedPainPoints": [],
+        "firstVersion": "v0.1",
+        "lastUpdated": "v0.1",
+        "history": []
+      },
+      {
+        "id": "REQ-013",
+        "category": "security",
+        "title": "细粒度权限控制",
+        "description": "支持基于角色和组织的权限管理",
+        "priority": "must",
+        "confidence": "low",
+        "source": {"type": "industry-pattern", "detail": "制造企业多部门协作需要细粒度权限", "raw": null},
+        "status": "active",
+        "module": "权限管理",
+        "userStory": "作为系统管理员，我需要配置不同角色的权限",
+        "acceptanceCriteria": ["角色-权限映射", "数据权限", "操作日志审计"],
+        "relatedPainPoints": [],
+        "firstVersion": "v0.1",
+        "lastUpdated": "v0.1",
+        "history": []
+      },
+      {
+        "id": "REQ-014",
+        "category": "non-functional",
+        "title": "系统性能与高可用",
+        "description": "支持500+用户并发，响应时间<3秒，支持集群部署",
+        "priority": "should",
+        "confidence": "low",
+        "source": {"type": "profile-inference", "detail": "员工500余人，需保证系统性能", "raw": null},
+        "status": "active",
+        "module": "性能",
+        "userStory": "作为IT管理员，我需要系统支持多用户并发访问",
+        "acceptanceCriteria": ["500+并发用户", "核心操作<2秒"],
+        "relatedPainPoints": [],
+        "firstVersion": "v0.1",
+        "lastUpdated": "v0.1",
+        "history": []
+      },
+      {
+        "id": "REQ-015",
+        "category": "non-functional",
+        "title": "可配置性与扩展性",
+        "description": "支持表单、流程、报表的灵活配置",
+        "priority": "should",
+        "confidence": "low",
+        "source": {"type": "industry-pattern", "detail": "制造企业业务流程个性化需求多", "raw": null},
+        "status": "active",
+        "module": "配置",
+        "userStory": "作为系统管理员，我需要配置自定义表单和流程",
+        "acceptanceCriteria": ["自定义表单", "流程配置", "二次开发SDK"],
+        "relatedPainPoints": [],
+        "firstVersion": "v0.1",
+        "lastUpdated": "v0.1",
+        "history": []
+      }
+    ],
+    "users": [
+      {"id": "U-001", "role": "设备管理员", "count": "3-5人", "responsibilities": ["设备台账管理", "维护计划制定", "备件管理"], "keyNeeds": ["REQ-002", "REQ-004", "REQ-006"]},
+      {"id": "U-002", "role": "点检员/操作工", "count": "20-30人", "responsibilities": ["设备点检", "故障报修"], "keyNeeds": ["REQ-003", "REQ-005", "REQ-009"]},
+      {"id": "U-003", "role": "维修工", "count": "10-15人", "responsibilities": ["故障维修", "维护工单执行"], "keyNeeds": ["REQ-005", "REQ-009"]},
+      {"id": "U-004", "role": "生产经理", "count": "3-5人", "responsibilities": ["OEE分析", "设备效率管理"], "keyNeeds": ["REQ-007", "REQ-008"]},
+      {"id": "U-005", "role": "IT管理员", "count": "2-3人", "responsibilities": ["系统运维", "权限管理", "系统集成"], "keyNeeds": ["REQ-010", "REQ-011", "REQ-013"]}
+    ],
     "scope": {
-      "inScope": [],
-      "outOfScope": [],
-      "futureScope": [],
-      "phases": [],
+      "inScope": ["设备台账管理", "点检巡检", "预防性维护", "故障维修", "备件管理", "OEE分析"],
+      "outOfScope": ["生产排程（MES范围）", "质量管理（QMS范围）"],
+      "futureScope": ["预测性维护（IoT传感器）", "AR维修指导", "设备全生命周期成本分析"],
+      "phases": [
+        {"phase": "一期", "scope": ["设备台账", "维修管理", "点检管理"], "duration": "3-4个月"},
+        {"phase": "二期", "scope": ["OEE分析", "备件管理", "移动端"], "duration": "2-3个月"}
+      ],
       "priorityMatrix": []
     },
-
     "constraints": {
-      "budget": {
-        "total": "",
-        "breakdown": [],
-        "paymentTerms": "",
-        "flexibility": ""
-      },
-      "timeline": {
-        "expectedStart": "",
-        "expectedGoLive": "",
-        "hardDeadline": "",
-        "reason": "",
-        "flexibility": ""
-      },
-      "resources": {
-        "clientTeam": [],
-        "availability": "",
-        "constraints": []
-      },
-      "technical": {
-        "existingInfrastructure": [],
-        "mandatoryTech": [],
-        "prohibitedTech": [],
-        "networkConstraints": [],
-        "deploymentConstraints": []
-      },
-      "organizational": {
-        "approvalProcess": "",
-        "changeManagement": "",
-        "vendorPolicies": [],
-        "complianceRequirements": []
-      }
+      "budget": {"total": "100万元左右", "breakdown": [], "paymentTerms": "未获取", "flexibility": "未获取"},
+      "timeline": {"expectedStart": "", "expectedGoLive": "", "hardDeadline": "", "reason": "", "flexibility": ""},
+      "resources": {"clientTeam": ["设备部", "IT部"], "availability": "", "constraints": []},
+      "technical": {"existingInfrastructure": ["推测有ERP", "推测有MES"], "mandatoryTech": [], "prohibitedTech": [], "networkConstraints": [], "deploymentConstraints": ["客户在SaaS与私有化间权衡"]},
+      "organizational": {"approvalProcess": "董事会→总经理→技术负责人", "changeManagement": "", "vendorPolicies": [], "complianceRequirements": []}
     },
-
     "successCriteria": {
-      "businessCriteria": [],
-      "technicalCriteria": [],
-      "userCriteria": [],
-      "projectCriteria": [],
-      "roiExpectation": {
-        "expectedBenefits": [],
-        "paybackPeriod": "",
-        "quantifiableMetrics": []
-      }
+      "businessCriteria": ["设备台账完整率>95%", "维修工单闭环率100%", "设备OEE可视化"],
+      "technicalCriteria": ["系统稳定性>99%", "响应时间<3秒"],
+      "userCriteria": ["用户培训覆盖率100%", "一线人员接受度良好"],
+      "projectCriteria": ["按期上线", "预算控制"],
+      "roiExpectation": {"expectedBenefits": ["减少非计划停机", "提升设备利用率", "降低维修成本"], "paybackPeriod": "", "quantifiableMetrics": []}
     },
-
     "risksAndAssumptions": {
-      "risks": [],
-      "assumptions": [],
-      "dependencies": []
+      "risks": [
+        {"risk": "客户在SaaS与定制间摇摆，决策周期可能延长", "impact": "中", "mitigation": "清晰说明两种方案的优劣和适用场景"},
+        {"risk": "设备数据采集基础不足，OEE依赖人工录入", "impact": "高", "mitigation": "前期人工录入为主，逐步推进设备联网"},
+        {"risk": "现有ERP/MES老旧，集成困难", "impact": "中", "mitigation": "采用中间文件方式同步，降低集成难度"}
+      ],
+      "assumptions": ["客户目前使用Excel或简单台账管理设备", "设备具备一定联网条件", "客户已有ERP和MES系统"],
+      "dependencies": ["客户配合需求调研", "现有系统供应商配合集成"]
     },
-
     "solutionDirection": {
-      "overallApproach": "",
-      "recommendedApproach": {
-        "type": "",
-        "rationale": "",
-        "alternatives": []
-      },
-      "technicalDirection": {
-        "architecture": "",
-        "deployment": "",
-        "techStack": []
-      },
-      "implementationStrategy": {
-        "approach": "",
-        "pilotScope": "",
-        "rolloutPlan": ""
-      },
-      "nextSteps": []
+      "overallApproach": "客户在SaaS与定制开发之间权衡，需要根据具体需求匹配度给出建议。100w预算可支持中等复杂度的EAM系统。",
+      "recommendedApproach": {"type": "待评估", "rationale": "需先了解客户具体业务场景和个性化需求程度，再判断标准化产品是否满足", "alternatives": [{"type": "成熟SaaS+私有化部署", "benefit": "标准化程度高、上线快、成本低", "drawback": "个性化定制能力有限"}, {"type": "定制开发", "benefit": "完全贴合业务", "drawback": "周期长、成本高、后期维护风险"}]},
+      "technicalDirection": {"architecture": "B/S架构，微服务可选", "deployment": "私有化部署（倾向）或混合云", "techStack": ["Java/.NET", "关系型数据库", "Redis缓存", "可选：微服务"]},
+      "implementationStrategy": {"approach": "建议分期实施，先核心后外围", "pilotScope": "试点车间或关键设备", "rolloutPlan": "设备台账+维修管理先行，OEE分析后续"},
+      "nextSteps": ["需求访谈验证必问问题", "现场调研设备现状", "确认系统集成范围", "输出方案对比"]
     },
-
-    "pendingQuestions": [],
-
-    "completionRate": {
-      "overall": 0,
-      "byCategory": {},
-      "blockers": []
-    }
+    "pendingQuestions": [
+      {"id": "PQ-001", "category": "业务", "priority": "必问", "question": "EAM系统的覆盖范围是什么？仅生产设备，还是包括检测设备、辅助设备（叉车、行车）？", "purpose": "明确设备管理范围，影响系统架构", "expectedDirection": "通常包括所有生产相关设备", "targetPerson": "设备部负责人", "relatedNeedIds": ["REQ-002"], "impactIfUnknown": "系统设计范围不清晰", "status": "pending", "answer": "", "answeredAt": ""},
+      {"id": "PQ-002", "category": "技术", "priority": "必问", "question": "设备是否已联网或具备联网条件？PLC型号和通讯协议是什么？", "purpose": "评估OEE自动采集方案的可行性", "expectedDirection": "部分新设备可能已联网", "targetPerson": "设备部/IT部", "relatedNeedIds": ["REQ-007", "REQ-012"], "impactIfUnknown": "OEE方案设计不准确", "status": "pending", "answer": "", "answeredAt": ""},
+      {"id": "PQ-003", "category": "技术", "priority": "必问", "question": "现有ERP、MES系统是什么品牌？需要集成哪些数据？", "purpose": "明确集成边界和技术方案", "expectedDirection": "可能有国产ERP（用友/金蝶）或自研MES", "targetPerson": "IT部", "relatedNeedIds": ["REQ-010"], "impactIfUnknown": "集成方案不明确", "status": "pending", "answer": "", "answeredAt": ""},
+      {"id": "PQ-004", "category": "时间", "priority": "必问", "question": "期望的系统上线时间？是否分期实施？", "purpose": "影响项目规划和交付节奏", "expectedDirection": "通常6-12个月", "targetPerson": "项目经理/决策层", "relatedNeedIds": [], "impactIfUnknown": "无法制定项目计划", "status": "pending", "answer": "", "answeredAt": ""},
+      {"id": "PQ-005", "category": "预算", "priority": "必问", "question": "倾向于SaaS还是私有化部署？对数据安全有什么要求？", "purpose": "明确部署模式偏好", "expectedDirection": "国有改制企业可能倾向私有化", "targetPerson": "决策层/IT部", "relatedNeedIds": ["REQ-011"], "impactIfUnknown": "方案方向不清晰", "status": "pending", "answer": "", "answeredAt": ""},
+      {"id": "PQ-006", "category": "业务", "priority": "选问", "question": "当前设备台账用什么管理？Excel还是其他系统？数据质量如何？", "purpose": "评估数据迁移工作量", "expectedDirection": "可能是Excel", "targetPerson": "设备部", "relatedNeedIds": ["REQ-002"], "impactIfUnknown": "数据迁移工作量评估不准", "status": "pending", "answer": "", "answeredAt": ""},
+      {"id": "PQ-007", "category": "业务", "priority": "选问", "question": "倾向于APP还是小程序？预计有多少移动端用户？", "purpose": "影响移动端技术选型", "expectedDirection": "可能倾向小程序（无需安装）", "targetPerson": "设备部", "relatedNeedIds": ["REQ-009"], "impactIfUnknown": "移动端授权数量不准", "status": "pending", "answer": "", "answeredAt": ""},
+      {"id": "PQ-008", "category": "业务", "priority": "选问", "question": "是否需要预留预测性维护功能（IoT传感器）？", "purpose": "评估前瞻性需求", "expectedDirection": "可能作为二期规划", "targetPerson": "技术部", "relatedNeedIds": [], "impactIfUnknown": "系统扩展性设计不足", "status": "pending", "answer": "", "answeredAt": ""},
+      {"id": "PQ-009", "category": "技术", "priority": "选问", "question": "是否需要与财务系统集成（设备折旧、维修成本）？", "purpose": "评估财务集成需求", "expectedDirection": "通常需要", "targetPerson": "财务部/IT部", "relatedNeedIds": ["REQ-010"], "impactIfUnknown": "财务集成需求遗漏", "status": "pending", "answer": "", "answeredAt": ""},
+      {"id": "PQ-010", "category": "业务", "priority": "选问", "question": "是否有特殊合规要求（ISO9001、特种设备管理）？", "purpose": "评估合规功能", "expectedDirection": "可能有ISO9001", "targetPerson": "质量部", "relatedNeedIds": [], "impactIfUnknown": "合规功能缺失", "status": "pending", "answer": "", "answeredAt": ""}
+    ],
+    "completionRate": {"overall": 15, "byCategory": {"business": 40, "functional": 10, "technical": 10, "integration": 5, "security": 10, "non-functional": 10}, "blockers": []}
   }
 }
