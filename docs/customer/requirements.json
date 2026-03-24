@@ -1,5 +1,5 @@
 {
-  "currentVersion": "v0.1",
+  "currentVersion": "v0.2",
   "status": "draft",
   "versions": [
     {
@@ -13,6 +13,16 @@
         "基于企业特征推演5条技术需求",
         "生成5个必问+5个选问问题"
       ]
+    },
+    {
+      "version": "v0.2",
+      "createdAt": "2026-03-24T00:00:00Z",
+      "trigger": "iteration",
+      "inputSummary": "客户期望年底完成项目并上线",
+      "changeSummary": [
+        "确认项目时间节点：期望2026年底上线",
+        "回答PQ-004问题"
+      ]
     }
   ],
   "current": {
@@ -21,7 +31,7 @@
       "lastUpdated": "2026-03-24",
       "overallAssessment": {
         "customerIntent": "评估中",
-        "projectUrgency": "不明确",
+        "projectUrgency": "中（期望年底上线，时间约9个月）",
         "budgetSituation": "100w左右",
         "competitionStatus": "不明确",
         "winProbability": "不明确",
@@ -48,7 +58,8 @@
       "meetings": [],
       "documents": [],
       "communications": [
-        {"type": "电话/微信沟通", "date": "2026-03-24", "summary": "客户表达EAM需求，预算100w，考虑SaaS与定制两种方式"}
+        {"type": "电话/微信沟通", "date": "2026-03-24", "summary": "客户表达EAM需求，预算100w，考虑SaaS与定制两种方式"},
+        {"type": "电话/微信沟通", "date": "2026-03-24", "summary": "客户期望年底完成项目并上线"}
       ],
       "observations": []
     },
@@ -346,7 +357,7 @@
     },
     "constraints": {
       "budget": {"total": "100万元左右", "breakdown": [], "paymentTerms": "未获取", "flexibility": "未获取"},
-      "timeline": {"expectedStart": "", "expectedGoLive": "", "hardDeadline": "", "reason": "", "flexibility": ""},
+      "timeline": {"expectedStart": "2026年Q2", "expectedGoLive": "2026-12-31", "hardDeadline": "2026-12-31", "reason": "客户期望年底完成项目并上线", "flexibility": "中"},
       "resources": {"clientTeam": ["设备部", "IT部"], "availability": "", "constraints": []},
       "technical": {"existingInfrastructure": ["推测有ERP", "推测有MES"], "mandatoryTech": [], "prohibitedTech": [], "networkConstraints": [], "deploymentConstraints": ["客户在SaaS与私有化间权衡"]},
       "organizational": {"approvalProcess": "董事会→总经理→技术负责人", "changeManagement": "", "vendorPolicies": [], "complianceRequirements": []}
@@ -378,7 +389,7 @@
       {"id": "PQ-001", "category": "业务", "priority": "必问", "question": "EAM系统的覆盖范围是什么？仅生产设备，还是包括检测设备、辅助设备（叉车、行车）？", "purpose": "明确设备管理范围，影响系统架构", "expectedDirection": "通常包括所有生产相关设备", "targetPerson": "设备部负责人", "relatedNeedIds": ["REQ-002"], "impactIfUnknown": "系统设计范围不清晰", "status": "pending", "answer": "", "answeredAt": ""},
       {"id": "PQ-002", "category": "技术", "priority": "必问", "question": "设备是否已联网或具备联网条件？PLC型号和通讯协议是什么？", "purpose": "评估OEE自动采集方案的可行性", "expectedDirection": "部分新设备可能已联网", "targetPerson": "设备部/IT部", "relatedNeedIds": ["REQ-007", "REQ-012"], "impactIfUnknown": "OEE方案设计不准确", "status": "pending", "answer": "", "answeredAt": ""},
       {"id": "PQ-003", "category": "技术", "priority": "必问", "question": "现有ERP、MES系统是什么品牌？需要集成哪些数据？", "purpose": "明确集成边界和技术方案", "expectedDirection": "可能有国产ERP（用友/金蝶）或自研MES", "targetPerson": "IT部", "relatedNeedIds": ["REQ-010"], "impactIfUnknown": "集成方案不明确", "status": "pending", "answer": "", "answeredAt": ""},
-      {"id": "PQ-004", "category": "时间", "priority": "必问", "question": "期望的系统上线时间？是否分期实施？", "purpose": "影响项目规划和交付节奏", "expectedDirection": "通常6-12个月", "targetPerson": "项目经理/决策层", "relatedNeedIds": [], "impactIfUnknown": "无法制定项目计划", "status": "pending", "answer": "", "answeredAt": ""},
+      {"id": "PQ-004", "category": "时间", "priority": "必问", "question": "期望的系统上线时间？是否分期实施？", "purpose": "影响项目规划和交付节奏", "expectedDirection": "通常6-12个月", "targetPerson": "项目经理/决策层", "relatedNeedIds": [], "impactIfUnknown": "无法制定项目计划", "status": "answered", "answer": "期望2026年底完成项目并上线", "answeredAt": "2026-03-24"},
       {"id": "PQ-005", "category": "预算", "priority": "必问", "question": "倾向于SaaS还是私有化部署？对数据安全有什么要求？", "purpose": "明确部署模式偏好", "expectedDirection": "国有改制企业可能倾向私有化", "targetPerson": "决策层/IT部", "relatedNeedIds": ["REQ-011"], "impactIfUnknown": "方案方向不清晰", "status": "pending", "answer": "", "answeredAt": ""},
       {"id": "PQ-006", "category": "业务", "priority": "选问", "question": "当前设备台账用什么管理？Excel还是其他系统？数据质量如何？", "purpose": "评估数据迁移工作量", "expectedDirection": "可能是Excel", "targetPerson": "设备部", "relatedNeedIds": ["REQ-002"], "impactIfUnknown": "数据迁移工作量评估不准", "status": "pending", "answer": "", "answeredAt": ""},
       {"id": "PQ-007", "category": "业务", "priority": "选问", "question": "倾向于APP还是小程序？预计有多少移动端用户？", "purpose": "影响移动端技术选型", "expectedDirection": "可能倾向小程序（无需安装）", "targetPerson": "设备部", "relatedNeedIds": ["REQ-009"], "impactIfUnknown": "移动端授权数量不准", "status": "pending", "answer": "", "answeredAt": ""},
@@ -386,6 +397,6 @@
       {"id": "PQ-009", "category": "技术", "priority": "选问", "question": "是否需要与财务系统集成（设备折旧、维修成本）？", "purpose": "评估财务集成需求", "expectedDirection": "通常需要", "targetPerson": "财务部/IT部", "relatedNeedIds": ["REQ-010"], "impactIfUnknown": "财务集成需求遗漏", "status": "pending", "answer": "", "answeredAt": ""},
       {"id": "PQ-010", "category": "业务", "priority": "选问", "question": "是否有特殊合规要求（ISO9001、特种设备管理）？", "purpose": "评估合规功能", "expectedDirection": "可能有ISO9001", "targetPerson": "质量部", "relatedNeedIds": [], "impactIfUnknown": "合规功能缺失", "status": "pending", "answer": "", "answeredAt": ""}
     ],
-    "completionRate": {"overall": 15, "byCategory": {"business": 40, "functional": 10, "technical": 10, "integration": 5, "security": 10, "non-functional": 10}, "blockers": []}
+    "completionRate": {"overall": 20, "byCategory": {"business": 40, "functional": 10, "technical": 10, "integration": 5, "security": 10, "non-functional": 10}, "blockers": []}
   }
 }
