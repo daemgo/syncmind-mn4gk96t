@@ -1,95 +1,271 @@
 {
-  "profile": {
-    "companyName": "",
-    "shortName": "",
-    "isListed": false,
-    "stockCode": "",
-    "website": "",
-    "industry": "",
-    "subIndustry": "",
-    "scale": "",
-    "mainBusiness": "",
-    "products": [],
-    "targetCustomers": [],
-    "businessModel": "",
-    "rating": "",
-    "tags": [],
-
-    "summary": "",
-
-    "registration": {
-      "foundedDate": "",
-      "registeredCapital": "",
-      "paidInCapital": "",
-      "ownershipType": "",
-      "branches": {
-        "count": "",
-        "locations": []
-      },
-      "legalRisks": "",
-      "operatingAnomalies": "",
-      "penalties": "",
-      "summary": ""
+  "id": "yc-cjmt-2026",
+  "companyName": "宜昌长机科技有限责任公司",
+  "shortName": "长机科技",
+  "registeredName": "宜昌长机科技有限责任公司",
+  "website": "https://www.cjmt.com.cn/",
+  "industry": "通用设备制造业",
+  "subIndustry": "机床工具/数控机床/齿轮加工装备",
+  "scale": "中型企业（员工500余人，总资产5亿余元）",
+  "stage": "数字化转型深化期",
+  "type": "国有改制企业（原长江机床厂，始建于1968年）",
+  "rating": "AA-",
+  "tags": [
+    "专精特新",
+    "单项冠军产品",
+    "国企改制",
+    "数字化转型AAA级",
+    "质量保证级",
+    "智能制造国家队",
+    "两化融合示范",
+    "齿轮机床专家",
+    "国家级专精特新小巨人",
+    "高新技术"
+  ],
+  "priority": "中高",
+  "products": [
+    {
+      "name": "数控插齿机",
+      "description": "工信部单项冠军产品，覆盖Φ120-5000mm全系列，被中国机床工具工业协会评为质量十佳",
+      "category": "齿加工装备",
+      "features": ["规格全系列覆盖", "质量十佳", "单项冠军产品"],
+      "targetUsers": ["风电设备制造商", "工程机械企业", "汽车转向器厂商"]
     },
-
-    "policyAnalysis": {
-      "isSpecialized": false,
-      "isDigitalTransformation": false,
-      "isESG": false,
-      "isHighTech": false,
-      "policySupportLevel": "",
-      "leverageStrategy": ""
+    {
+      "name": "数控滚齿机",
+      "description": "加工直径Φ500-6000mm，适用于能源、交通、矿山、电力、重型机械等行业",
+      "category": "齿加工装备",
+      "features": ["大直径加工", "重型机械适用"],
+      "targetUsers": ["能源企业", "矿山机械", "重型机械"]
     },
-
-    "timing": {
-      "currentPhase": "",
-      "evidence": "",
-      "entryStrategy": ""
+    {
+      "name": "数控铣齿机",
+      "description": "加工直径Φ800-8000mm，适用于风电、回转支承、矿山机械、冶金等领域",
+      "category": "齿加工装备",
+      "features": ["超大直径加工"],
+      "targetUsers": ["风电设备", "回转支承", "冶金企业"]
     },
-
-    "creditRisk": {
-      "legalRisk": "",
-      "operationalRisk": "",
-      "creditRating": "",
-      "warnings": [],
-      "salesAdvice": ""
+    {
+      "name": "数控刮齿机",
+      "description": "采用直驱技术，加工精度GB5级，效率比插齿快3-5倍",
+      "category": "齿加工装备",
+      "features": ["直驱技术", "高精度GB5级", "高效率"],
+      "targetUsers": ["精密制造企业"]
     },
-
-    "organization": {
-      "type": "",
-      "decisionChain": "",
-      "keyPersons": [],
-      "salesStrategy": ""
+    {
+      "name": "齿条加工设备",
+      "description": "包括齿条插齿机、铣齿机、磨齿机，长度覆盖L320-3000mm",
+      "category": "齿条加工",
+      "features": ["全长度覆盖", "多工艺集成"],
+      "targetUsers": ["电梯制造", "精密机床厂"]
     },
-
-    "strategy": {
-      "phase": "",
-      "growthStage": "",
-      "competitivePosition": "",
-      "digitalMaturity": "",
-      "analysisPath": "",
-      "informationQuality": "",
-      "expansionSignals": [],
-      "contractionSignals": [],
-      "riskSignals": []
-    },
-
-    "techStack": {
-      "current": [],
-      "inferred": [],
-      "maturity": "",
-      "direction": ""
-    },
-
-    "keyMetrics": [],
-
-    "metadata": {
-      "createdAt": "",
-      "updatedAt": "",
-      "createdBy": "",
-      "version": "",
-      "sources": [],
-      "confidence": 0
+    {
+      "name": "机床再制造服务",
+      "description": "再制造中心创建于1976年，提供机床升级改造服务",
+      "category": "服务",
+      "features": ["历史悠久", "升级改造"],
+      "targetUsers": ["拥有旧设备的制造企业"]
     }
-  }
+  ],
+  "mainBusiness": "齿轮加工机床研发制造与销售，产品涵盖数控插齿机、滚齿机、铣齿机、刮齿机、齿条加工设备等全系列齿加工装备，同时提供机床再制造服务。",
+  "targetCustomers": [
+    "风电设备制造商",
+    "工程机械企业",
+    "汽车转向器厂商",
+    "矿山机械企业",
+    "冶金企业",
+    "电梯制造企业",
+    "精密机床厂",
+    "轴承加工企业"
+  ],
+  "businessModel": "B2B装备制造，直接销售+售后服务的传统装备制造模式",
+  "techStack": {
+    "current": [],
+    "inferred": ["数字化转型AAA级认证系统"],
+    "maturity": "两化融合AAA级（国家最高水平）",
+    "direction": "智能制造深化应用"
+  },
+  "strategy": {
+    "phase": "数字化转型深化期",
+    "growthStage": "稳定增长，能力升级关键期",
+    "competitivePosition": "细分领域领先—中国唯一的全系列和最大型插齿机制造基地",
+    "digitalMaturity": "两化融合AAA级（国家最高水平），数字化转型管理体系AAA级",
+    "analysisPath": "B+",
+    "informationQuality": "75/100",
+    "expansionSignals": [
+      "2025年获两化融合管理体系AAA级和数字化转型管理体系AAA级双认证",
+      "2025年入选工信部首批制造业质量管理能力高等级企业名单",
+      "2025年10月举办齿加工装备技术研讨会，150+行业专家参与"
+    ],
+    "contractionSignals": [],
+    "riskSignals": []
+  },
+  "painPoints": [
+    {
+      "category": "生产管理",
+      "description": "多品种小批量定制化生产模式（规格全、定制多）导致排产复杂，进度跟踪困难",
+      "severity": "高",
+      "source": "行业特征推演"
+    },
+    {
+      "category": "质量管理",
+      "description": "产品精度要求高（GB5-7级），质检依赖人工，追溯难度大，客诉处理效率低",
+      "severity": "高",
+      "source": "行业特征推演"
+    },
+    {
+      "category": "设备管理",
+      "description": "作为机床制造商，自身生产设备OEE数据缺乏系统化管理，预测性维护能力不足",
+      "severity": "中",
+      "source": "[假设待验证]"
+    },
+    {
+      "category": "成本核算",
+      "description": "定制化产品成本核算复杂，报价依赖经验，利润分析不透明",
+      "severity": "中",
+      "source": "[假设待验证]"
+    },
+    {
+      "category": "供应链协同",
+      "description": "供应商分散（机械、电气、液压多品类），对账困难，质量追溯链条长",
+      "severity": "中",
+      "source": "[假设待验证]"
+    }
+  ],
+  "requirements": [],
+  "opportunities": [
+    {
+      "area": "智能制造深化",
+      "description": "已获数字化转型AAA级认证，可推荐MES/APS/设备管理等智能制造深化应用，与国家政策同频",
+      "valueProp": "与现有数字化转型基础衔接，深化智能制造应用",
+      "likelihood": "高"
+    },
+    {
+      "area": "质量管理升级",
+      "description": "获制造业质量管理能力保证级认定，可推荐QMS质量追溯系统，强化质量全流程管控",
+      "valueProp": "强化质量管理能力，与质量保证级认定相辅相成",
+      "likelihood": "高"
+    },
+    {
+      "area": "再制造业务数字化",
+      "description": "拥有机床再制造中心（创建于1976年），可推荐再制造业务全流程数字化管理，提升服务效率",
+      "valueProp": "提升服务型业务效率，创造新的收入增长点",
+      "likelihood": "中"
+    }
+  ],
+  "contacts": [],
+  "budget": {
+    "range": "未获取",
+    "deliveryTime": "未获取",
+    "paymentCycle": "未获取",
+    "decisionCycle": "未获取",
+    "intentionLevel": 0,
+    "stage": "初步接触"
+  },
+  "decision": {
+    "makers": ["董事长/总经理"],
+    "influencers": ["技术负责人"],
+    "blockers": [],
+    "criteria": ["技术性能", "资质认证", "长期合作稳定性"],
+    "timeline": "未获取"
+  },
+  "tracking": {
+    "status": "新客户",
+    "stage": "档案建立",
+    "nextAction": "生成销售进攻指南",
+    "lastUpdate": "2026-03-24",
+    "touchpoints": []
+  },
+  "metadata": {
+    "createdAt": "2026-03-24T00:00:00Z",
+    "updatedAt": "2026-03-24T00:00:00Z",
+    "createdBy": "AI",
+    "version": "1.0",
+    "sources": [
+      "https://www.cjmt.com.cn/",
+      "天眼查/企查查",
+      "招聘平台信息",
+      "行业新闻"
+    ],
+    "confidence": 75,
+    "notes": "齿轮制造解决方案的专家。总资产5亿余元，净资产超过4.2亿元。中国一汽、徐工集团、南高齿、舍弗勒等知名客户。国有改制企业，保留国企背景但市场化运营。"
+  },
+  "policyAnalysis": {
+    "isSpecializedSME": true,
+    "smeLevel": "国家级专精特新小巨人",
+    "isHighTech": true,
+    "isGazelle": false,
+    "isUnicorn": false,
+    "digitalTransformation": {
+      "hit": true,
+      "details": "位于湖北省宜昌市，该市为国家级中小企业数字化转型试点城市；公司进行智能化改造与数字化转型"
+    }
+  },
+  "creditRisk": {
+    "lawsuitCount": null,
+    "lawsuitTypes": [],
+    "majorLawsuits": [],
+    "administrativePenalties": [],
+    "executedPerson": false,
+    "dishonestPerson": false,
+    "businessAnomalies": [],
+    "equityFreeze": false,
+    "equityPledge": false,
+    "assessment": "未发现明显司法风险"
+  },
+  "organization": {
+    "decisionChain": "董事会（决策层）→总经理（管理层）→技术/销售/生产负责人（执行层）→部门经理；重大采购需董事会审批，技术方案由技术负责人把关，商务谈判由销售主导。",
+    "keyPersons": [
+      {
+        "name": "叶又生",
+        "title": "董事长、总经理"
+      },
+      {
+        "name": "唐兆庆",
+        "title": "总经理"
+      },
+      {
+        "name": "胡天明",
+        "title": "总工程师"
+      }
+    ],
+    "salesStrategy": "针对国企改制背景，需同时满足技术决策人（关注产品性能和技术创新）和管理决策人（关注资质、合规和长期合作）的双重需求；建议从技术交流切入，展示同类客户案例，强调单项冠军产品和数字化转型资质。"
+  },
+  "competition": {
+    "industryRank": "中国唯一的全系列和最大型插齿机制造基地，细分领域领先",
+    "marketShare": null,
+    "mainCompetitors": [
+      "[假设待验证] 国内齿轮机床同行：重庆机床集团、南京二机机床、上海机床厂等",
+      "[假设待验证] 国际竞对：Gleason、Liebherr、Mitsubishi Heavy Industries等高端齿轮机床厂商"
+    ],
+    "knownClients": [
+      "中国一汽",
+      "三环集团",
+      "徐工集团",
+      "南高齿",
+      "京冶轴承",
+      "泰隆集团",
+      "兰石集团",
+      "浙江上优刀具有限公司",
+      "舍弗勒(Schaeffler)"
+    ]
+  },
+  "hiringSignals": [
+    "招聘软件工程、计算机科学与技术等IT岗位，要求211/985院校，显示数字化转型对高端技术人才的需求",
+    "招聘电气设计、机械设计、工业设计、液压设计等研发岗位，技术人才需求持续",
+    "提供五险一金、福利食堂、员工公寓等保障性福利，显示传统制造企业的人才吸引策略"
+  ],
+  "keyMetrics": {
+    "总资产": "5亿余元",
+    "净资产": "超过4.2亿元",
+    "员工人数": "500余人",
+    "占地面积": "24万平方米",
+    "专利数量": "256条",
+    "商标数量": "9条",
+    "招投标参与": "118次"
+  },
+  "slogan": "齿轮制造解决方案的专家",
+  "isListed": false,
+  "stockCode": null,
+  "revenueScale": "总资产5亿余元，净资产超过4.2亿元"
 }
