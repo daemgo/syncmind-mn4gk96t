@@ -1,3 +1,94 @@
+// CRM Customer type definitions for customer management module
+
+export type CustomerStatus = 'lead' | 'contacted' | 'qualified' | 'customer' | 'lost'
+export type CustomerLevel = 'a' | 'b' | 'c'
+export type Industry = 'tech' | 'finance' | 'manufacturing' | 'retail' | 'healthcare' | 'education' | 'other'
+export type CompanyScale = '1-50' | '51-200' | '201-500' | '500+'
+export type CustomerSource = 'website' | 'referral' | 'exhibition' | 'cold_call' | 'other'
+
+export interface CrmCustomer {
+  id: string
+  companyName: string
+  industry: Industry
+  scale?: CompanyScale
+  level: CustomerLevel
+  status: CustomerStatus
+  source?: CustomerSource
+  contact: string
+  position?: string
+  phone: string
+  email?: string
+  wechat?: string
+  address?: string
+  owner: string
+  lastFollowup?: string
+  createdAt: string
+  updatedAt: string
+}
+
+export interface CustomerFormData {
+  companyName: string
+  industry: Industry
+  scale?: CompanyScale
+  level: CustomerLevel
+  source?: CustomerSource
+  contact: string
+  position?: string
+  phone: string
+  email?: string
+  wechat?: string
+  address?: string
+  owner: string
+  status?: CustomerStatus
+}
+
+export interface CustomerFilter {
+  keyword?: string
+  status?: CustomerStatus
+  level?: CustomerLevel
+  industry?: Industry
+}
+
+// Dictionary items for UI
+export const CRM_CUSTOMER_STATUS_OPTIONS = [
+  { value: 'lead', label: '线索', color: 'gray' },
+  { value: 'contacted', label: '已联系', color: 'blue' },
+  { value: 'qualified', label: 'qualified', color: 'purple' },
+  { value: 'customer', label: '成交客户', color: 'green' },
+  { value: 'lost', label: '已流失', color: 'red' },
+] as const
+
+export const CRM_CUSTOMER_LEVEL_OPTIONS = [
+  { value: 'a', label: 'A类（重点）' },
+  { value: 'b', label: 'B类（一般）' },
+  { value: 'c', label: 'C类（潜在）' },
+] as const
+
+export const CRM_INDUSTRY_OPTIONS = [
+  { value: 'tech', label: '科技/互联网' },
+  { value: 'finance', label: '金融' },
+  { value: 'manufacturing', label: '制造业' },
+  { value: 'retail', label: '零售' },
+  { value: 'healthcare', label: '医疗' },
+  { value: 'education', label: '教育' },
+  { value: 'other', label: '其他' },
+] as const
+
+export const CRM_COMPANY_SCALE_OPTIONS = [
+  { value: '1-50', label: '1-50人' },
+  { value: '51-200', label: '51-200人' },
+  { value: '201-500', label: '201-500人' },
+  { value: '500+', label: '500人以上' },
+] as const
+
+export const CRM_CUSTOMER_SOURCE_OPTIONS = [
+  { value: 'website', label: '官网咨询' },
+  { value: 'referral', label: '客户推荐' },
+  { value: 'exhibition', label: '展会' },
+  { value: 'cold_call', label: '电话开发' },
+  { value: 'other', label: '其他' },
+] as const
+
 // 客户档案类型定义
 
 export interface CustomerProfile {

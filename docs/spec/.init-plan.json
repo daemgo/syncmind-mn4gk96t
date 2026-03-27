@@ -1,0 +1,1017 @@
+{
+  "meta": {
+    "specVersion": "inferred",
+    "specHash": "crm-dialog-20260327",
+    "generatedAt": "2026-03-27T00:00:00Z",
+    "sourceMode": "dialog"
+  },
+  "globalRules": {
+    "dictionary": [
+      {
+        "id": "dict-customer-status",
+        "label": "客户状态",
+        "items": [
+          { "value": "lead", "label": "线索", "color": "gray" },
+          { "value": "contacted", "label": "已联系", "color": "blue" },
+          { "value": "qualified", "label": " qualified", "color": "purple" },
+          { "value": "customer", "label": "成交客户", "color": "green" },
+          { "value": "lost", "label": "已流失", "color": "red" }
+        ]
+      },
+      {
+        "id": "dict-followup-type",
+        "label": "跟进类型",
+        "items": [
+          { "value": "visit", "label": "拜访" },
+          { "value": "call", "label": "电话" },
+          { "value": "meeting", "label": "会议" },
+          { "value": "email", "label": "邮件" },
+          { "value": "other", "label": "其他" }
+        ]
+      },
+      {
+        "id": "dict-opportunity-stage",
+        "label": "销售阶段",
+        "items": [
+          { "value": "prospecting", "label": "线索", "color": "gray" },
+          { "value": "qualification", "label": "资格确认", "color": "blue" },
+          { "value": "proposal", "label": "方案报价", "color": "purple" },
+          { "value": "negotiation", "label": "谈判", "color": "yellow" },
+          { "value": "closed_won", "label": "成交", "color": "green" },
+          { "value": "closed_lost", "label": "失败", "color": "red" }
+        ]
+      },
+      {
+        "id": "dict-task-priority",
+        "label": "任务优先级",
+        "items": [
+          { "value": "low", "label": "低", "color": "gray" },
+          { "value": "medium", "label": "中", "color": "blue" },
+          { "value": "high", "label": "高", "color": "orange" },
+          { "value": "urgent", "label": "紧急", "color": "red" }
+        ]
+      },
+      {
+        "id": "dict-task-status",
+        "label": "任务状态",
+        "items": [
+          { "value": "pending", "label": "待处理", "color": "gray" },
+          { "value": "in_progress", "label": "进行中", "color": "blue" },
+          { "value": "completed", "label": "已完成", "color": "green" },
+          { "value": "cancelled", "label": "已取消", "color": "red" }
+        ]
+      },
+      {
+        "id": "dict-customer-level",
+        "label": "客户等级",
+        "items": [
+          { "value": "a", "label": "A类（重点）" },
+          { "value": "b", "label": "B类（一般）" },
+          { "value": "c", "label": "C类（潜在）" }
+        ]
+      },
+      {
+        "id": "dict-industry",
+        "label": "行业",
+        "items": [
+          { "value": "tech", "label": "科技/互联网" },
+          { "value": "finance", "label": "金融" },
+          { "value": "manufacturing", "label": "制造业" },
+          { "value": "retail", "label": "零售" },
+          { "value": "healthcare", "label": "医疗" },
+          { "value": "education", "label": "教育" },
+          { "value": "other", "label": "其他" }
+        ]
+      }
+    ],
+    "statusFlows": [
+      {
+        "id": "flow-customer-lifecycle",
+        "name": "客户生命周期",
+        "entityId": "customer",
+        "statuses": [
+          { "value": "lead", "label": "线索", "color": "gray" },
+          { "value": "contacted", "label": "已联系", "color": "blue" },
+          { "value": "qualified", "label": "qualified", "color": "purple" },
+          { "value": "customer", "label": "成交客户", "color": "green" },
+          { "value": "lost", "label": "已流失", "color": "red" }
+        ],
+        "transitions": [
+          { "from": "lead", "to": "contacted" },
+          { "from": "contacted", "to": "qualified" },
+          { "from": "contacted", "to": "lost" },
+          { "from": "qualified", "to": "customer" },
+          { "from": "qualified", "to": "lost" },
+          { "from": "customer", "to": "lost" }
+        ]
+      },
+      {
+        "id": "flow-sales-pipeline",
+        "name": "销售漏斗",
+        "entityId": "opportunity",
+        "statuses": [
+          { "value": "prospecting", "label": "线索", "color": "gray" },
+          { "value": "qualification", "label": "资格确认", "color": "blue" },
+          { "value": "proposal", "label": "方案报价", "color": "purple" },
+          { "value": "negotiation", "label": "谈判", "color": "yellow" },
+          { "value": "closed_won", "label": "成交", "color": "green" },
+          { "value": "closed_lost", "label": "失败", "color": "red" }
+        ],
+        "transitions": [
+          { "from": "prospecting", "to": "qualification" },
+          { "from": "qualification", "to": "proposal" },
+          { "from": "qualification", "to": "closed_lost" },
+          { "from": "proposal", "to": "negotiation" },
+          { "from": "proposal", "to": "closed_lost" },
+          { "from": "negotiation", "to": "closed_won" },
+          { "from": "negotiation", "to": "closed_lost" }
+        ]
+      }
+    ],
+    "roles": [
+      {
+        "roleId": "admin",
+        "roleName": "管理员",
+        "permissions": ["*"]
+      },
+      {
+        "roleId": "sales",
+        "roleName": "销售人员",
+        "permissions": ["customer.read", "customer.write", "followup.write", "opportunity.manage", "task.manage"]
+      },
+      {
+        "roleId": "sales_manager",
+        "roleName": "销售经理",
+        "permissions": ["customer.read", "customer.write", "followup.read", "opportunity.manage", "task.manage", "report.view"]
+      }
+    ]
+  },
+  "sitemap": [
+    {
+      "id": "dashboard",
+      "label": "概览",
+      "route": "/dashboard",
+      "icon": "LayoutDashboard",
+      "order": 1
+    },
+    {
+      "id": "customer",
+      "label": "客户管理",
+      "route": "/customers",
+      "icon": "Users",
+      "order": 2,
+      "children": [
+        { "id": "customer-list", "label": "客户列表", "route": "/customers" },
+        { "id": "customer-detail", "label": "客户详情", "route": "/customers/:id" },
+        { "id": "customer-add", "label": "新增客户", "route": "/customers/new" }
+      ]
+    },
+    {
+      "id": "followup",
+      "label": "跟进记录",
+      "route": "/followups",
+      "icon": "MessageSquare",
+      "order": 3
+    },
+    {
+      "id": "opportunity",
+      "label": "销售机会",
+      "route": "/opportunities",
+      "icon": "TrendingUp",
+      "order": 4
+    },
+    {
+      "id": "task",
+      "label": "任务提醒",
+      "route": "/tasks",
+      "icon": "CheckSquare",
+      "order": 5
+    }
+  ],
+  "modules": [
+    {
+      "moduleId": "customer",
+      "moduleName": "客户管理",
+      "routeBase": "customers",
+      "inferred": true,
+      "action": "create",
+      "locked": false,
+      "pages": [
+        {
+          "pageId": "customer-list",
+          "pageName": "客户列表",
+          "route": "/customers",
+          "layout": "list",
+          "sections": [
+            {
+              "sectionId": "filters",
+              "type": "form",
+              "fields": [
+                { "fieldKey": "keyword", "label": "关键词", "type": "text", "placeholder": "搜索客户名称、联系人" },
+                { "fieldKey": "status", "label": "状态", "type": "select", "optionSource": "dict-customer-status" },
+                { "fieldKey": "level", "label": "客户等级", "type": "select", "optionSource": "dict-customer-level" },
+                { "fieldKey": "industry", "label": "行业", "type": "select", "optionSource": "dict-industry" }
+              ],
+              "actions": [
+                { "actionId": "search", "label": "搜索", "type": "primary", "position": "right" },
+                { "actionId": "reset", "label": "重置", "type": "default", "position": "right" }
+              ]
+            },
+            {
+              "sectionId": "table",
+              "type": "table",
+              "columns": [
+                { "fieldKey": "companyName", "label": "公司名称", "width": 200, "sortable": true },
+                { "fieldKey": "contact", "label": "联系人", "width": 100 },
+                { "fieldKey": "phone", "label": "电话", "width": 120 },
+                { "fieldKey": "industry", "label": "行业", "width": 100, "optionSource": "dict-industry" },
+                { "fieldKey": "level", "label": "等级", "width": 80, "optionSource": "dict-customer-level" },
+                { "fieldKey": "status", "label": "状态", "width": 100, "optionSource": "dict-customer-status" },
+                { "fieldKey": "owner", "label": "负责人", "width": 100 },
+                { "fieldKey": "lastFollowup", "label": "最后跟进", "width": 120, "type": "date" }
+              ],
+              "actions": [
+                { "actionId": "view", "label": "查看", "type": "link", "position": "row" },
+                { "actionId": "edit", "label": "编辑", "type": "default", "position": "row" },
+                { "actionId": "delete", "label": "删除", "type": "danger", "position": "row" }
+              ],
+              "rowActions": [
+                { "actionId": "add-followup", "label": "添加跟进", "type": "primary" }
+              ],
+              "pagination": true
+            }
+          ]
+        },
+        {
+          "pageId": "customer-detail",
+          "pageName": "客户详情",
+          "route": "/customers/:id",
+          "layout": "detail",
+          "sections": [
+            {
+              "sectionId": "basic-info",
+              "type": "card",
+              "title": "基本信息",
+              "fields": [
+                { "fieldKey": "companyName", "label": "公司名称", "type": "text" },
+                { "fieldKey": "industry", "label": "行业", "type": "select", "optionSource": "dict-industry" },
+                { "fieldKey": "scale", "label": "规模", "type": "select", "options": [
+                  { "value": "1-50", "label": "1-50人" },
+                  { "value": "51-200", "label": "51-200人" },
+                  { "value": "201-500", "label": "201-500人" },
+                  { "value": "500+", "label": "500人以上" }
+                ]},
+                { "fieldKey": "level", "label": "客户等级", "type": "select", "optionSource": "dict-customer-level" },
+                { "fieldKey": "status", "label": "客户状态", "type": "select", "optionSource": "dict-customer-status" },
+                { "fieldKey": "source", "label": "客户来源", "type": "select", "options": [
+                  { "value": "website", "label": "官网咨询" },
+                  { "value": "referral", "label": "客户推荐" },
+                  { "value": "exhibition", "label": "展会" },
+                  { "value": "cold_call", "label": "电话开发" },
+                  { "value": "other", "label": "其他" }
+                ]},
+                { "fieldKey": "owner", "label": "负责人", "type": "user" },
+                { "fieldKey": "createdAt", "label": "创建时间", "type": "datetime", "readonly": true }
+              ]
+            },
+            {
+              "sectionId": "contact-info",
+              "type": "card",
+              "title": "联系信息",
+              "fields": [
+                { "fieldKey": "contact", "label": "联系人", "type": "text" },
+                { "fieldKey": "position", "label": "职位", "type": "text" },
+                { "fieldKey": "phone", "label": "电话", "type": "phone" },
+                { "fieldKey": "email", "label": "邮箱", "type": "email" },
+                { "fieldKey": "address", "label": "地址", "type": "address" },
+                { "fieldKey": "wechat", "label": "微信号", "type": "text" }
+              ]
+            },
+            {
+              "sectionId": "tabs",
+              "type": "tabs",
+              "tabs": [
+                {
+                  "tabId": "followups",
+                  "label": "跟进记录",
+                  "sections": [
+                    {
+                      "sectionId": "followup-timeline",
+                      "type": "timeline",
+                      "fields": [
+                        { "fieldKey": "type", "label": "类型", "type": "select", "optionSource": "dict-followup-type" },
+                        { "fieldKey": "content", "label": "内容", "type": "textarea" },
+                        { "fieldKey": "attendees", "label": "参与人", "type": "multiselect" },
+                        { "fieldKey": "createdAt", "label": "时间", "type": "datetime" }
+                      ],
+                      "actions": [
+                        { "actionId": "add-followup", "label": "添加跟进", "type": "primary" }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tabId": "opportunities",
+                  "label": "销售机会",
+                  "sections": [
+                    {
+                      "sectionId": "opp-table",
+                      "type": "table",
+                      "columns": [
+                        { "fieldKey": "name", "label": "机会名称", "width": 200 },
+                        { "fieldKey": "stage", "label": "阶段", "width": 100, "optionSource": "dict-opportunity-stage" },
+                        { "fieldKey": "amount", "label": "预计金额", "width": 120, "type": "money" },
+                        { "fieldKey": "expectedCloseDate", "label": "预计成交", "width": 120, "type": "date" },
+                        { "fieldKey": "owner", "label": "负责人", "width": 100 }
+                      ],
+                      "actions": [
+                        { "actionId": "add-opp", "label": "新建机会", "type": "primary", "position": "top" }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tabId": "tasks",
+                  "label": "相关任务",
+                  "sections": [
+                    {
+                      "sectionId": "task-table",
+                      "type": "table",
+                      "columns": [
+                        { "fieldKey": "title", "label": "任务标题", "width": 200 },
+                        { "fieldKey": "priority", "label": "优先级", "width": 80, "optionSource": "dict-task-priority" },
+                        { "fieldKey": "status", "label": "状态", "width": 100, "optionSource": "dict-task-status" },
+                        { "fieldKey": "dueDate", "label": "截止日期", "width": 120, "type": "date" },
+                        { "fieldKey": "assignee", "label": "负责人", "width": 100 }
+                      ],
+                      "actions": [
+                        { "actionId": "add-task", "label": "新建任务", "type": "primary", "position": "top" }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "actions": [
+            { "actionId": "edit", "label": "编辑", "type": "default", "position": "top" },
+            { "actionId": "delete", "label": "删除", "type": "danger", "position": "top" },
+            { "actionId": "convert-opp", "label": "转化为商机", "type": "primary", "position": "top" }
+          ]
+        },
+        {
+          "pageId": "customer-form",
+          "pageName": "客户表单",
+          "route": "/customers/new",
+          "layout": "form",
+          "sections": [
+            {
+              "sectionId": "basic-section",
+              "type": "form",
+              "title": "基本信息",
+              "fieldGroups": [
+                {
+                  "groupId": "company",
+                  "label": "公司信息",
+                  "fields": [
+                    { "fieldKey": "companyName", "label": "公司名称", "type": "text", "required": true },
+                    { "fieldKey": "industry", "label": "行业", "type": "select", "optionSource": "dict-industry", "required": true },
+                    { "fieldKey": "scale", "label": "规模", "type": "select", "options": [
+                      { "value": "1-50", "label": "1-50人" },
+                      { "value": "51-200", "label": "51-200人" },
+                      { "value": "201-500", "label": "201-500人" },
+                      { "value": "500+", "label": "500人以上" }
+                    ]},
+                    { "fieldKey": "level", "label": "客户等级", "type": "select", "optionSource": "dict-customer-level", "required": true },
+                    { "fieldKey": "source", "label": "客户来源", "type": "select", "options": [
+                      { "value": "website", "label": "官网咨询" },
+                      { "value": "referral", "label": "客户推荐" },
+                      { "value": "exhibition", "label": "展会" },
+                      { "value": "cold_call", "label": "电话开发" },
+                      { "value": "other", "label": "其他" }
+                    ]}
+                  ]
+                },
+                {
+                  "groupId": "contact",
+                  "label": "联系信息",
+                  "fields": [
+                    { "fieldKey": "contact", "label": "联系人", "type": "text", "required": true },
+                    { "fieldKey": "position", "label": "职位", "type": "text" },
+                    { "fieldKey": "phone", "label": "电话", "type": "phone", "required": true },
+                    { "fieldKey": "email", "label": "邮箱", "type": "email" },
+                    { "fieldKey": "wechat", "label": "微信号", "type": "text" },
+                    { "fieldKey": "address", "label": "地址", "type": "address" }
+                  ]
+                },
+                {
+                  "groupId": "assignment",
+                  "label": "分配信息",
+                  "fields": [
+                    { "fieldKey": "owner", "label": "负责人", "type": "user", "required": true },
+                    { "fieldKey": "status", "label": "客户状态", "type": "select", "optionSource": "dict-customer-status" }
+                  ]
+                }
+              ]
+            }
+          ],
+          "actions": [
+            { "actionId": "submit", "label": "保存", "type": "primary", "position": "bottom" },
+            { "actionId": "cancel", "label": "取消", "type": "default", "position": "bottom" }
+          ]
+        }
+      ],
+      "typeDefinition": {
+        "entityName": "Customer",
+        "fields": [
+          { "name": "id", "type": "string", "label": "ID", "system": true },
+          { "name": "companyName", "type": "string", "label": "公司名称", "required": true },
+          { "name": "industry", "type": "string", "label": "行业", "enum": "dict-industry" },
+          { "name": "scale", "type": "string", "label": "规模" },
+          { "name": "level", "type": "string", "label": "客户等级", "enum": "dict-customer-level" },
+          { "name": "status", "type": "string", "label": "状态", "enum": "dict-customer-status" },
+          { "name": "source", "type": "string", "label": "来源" },
+          { "name": "contact", "type": "string", "label": "联系人" },
+          { "name": "position", "type": "string", "label": "职位" },
+          { "name": "phone", "type": "string", "label": "电话" },
+          { "name": "email", "type": "string", "label": "邮箱" },
+          { "name": "wechat", "type": "string", "label": "微信号" },
+          { "name": "address", "type": "string", "label": "地址" },
+          { "name": "owner", "type": "string", "label": "负责人" },
+          { "name": "lastFollowup", "type": "datetime", "label": "最后跟进时间" },
+          { "name": "createdAt", "type": "datetime", "label": "创建时间", "system": true },
+          { "name": "updatedAt", "type": "datetime", "label": "更新时间", "system": true }
+        ]
+      },
+      "mockDataRequirements": {
+        "count": 20,
+        "fields": ["companyName", "industry", "level", "status", "contact", "phone", "owner", "lastFollowup"]
+      },
+      "filesToGenerate": [
+        "src/app/customers/page.tsx",
+        "src/app/customers/[id]/page.tsx",
+        "src/app/customers/new/page.tsx",
+        "src/components/customers/customer-table.tsx",
+        "src/components/customers/customer-form.tsx",
+        "src/components/customers/customer-detail.tsx"
+      ]
+    },
+    {
+      "moduleId": "followup",
+      "moduleName": "跟进记录",
+      "routeBase": "followups",
+      "inferred": true,
+      "action": "create",
+      "locked": false,
+      "pages": [
+        {
+          "pageId": "followup-list",
+          "pageName": "跟进记录",
+          "route": "/followups",
+          "layout": "list",
+          "sections": [
+            {
+              "sectionId": "filters",
+              "type": "form",
+              "fields": [
+                { "fieldKey": "keyword", "label": "关键词", "type": "text", "placeholder": "搜索客户、内容" },
+                { "fieldKey": "type", "label": "类型", "type": "select", "optionSource": "dict-followup-type" },
+                { "fieldKey": "dateRange", "label": "时间范围", "type": "daterange" }
+              ],
+              "actions": [
+                { "actionId": "search", "label": "搜索", "type": "primary", "position": "right" },
+                { "actionId": "reset", "label": "重置", "type": "default", "position": "right" }
+              ]
+            },
+            {
+              "sectionId": "timeline",
+              "type": "timeline",
+              "fields": [
+                { "fieldKey": "customer", "label": "客户", "type": "text", "link": "/customers/:customerId" },
+                { "fieldKey": "type", "label": "类型", "type": "select", "optionSource": "dict-followup-type" },
+                { "fieldKey": "content", "label": "跟进内容", "type": "textarea" },
+                { "fieldKey": "attendees", "label": "参与人", "type": "multiselect" },
+                { "fieldKey": "nextActions", "label": "后续计划", "type": "textarea" },
+                { "fieldKey": "createdAt", "label": "时间", "type": "datetime" },
+                { "fieldKey": "createdBy", "label": "记录人", "type": "user" }
+              ],
+              "actions": [
+                { "actionId": "add-followup", "label": "添加跟进", "type": "primary", "position": "top" }
+              ],
+              "pagination": true
+            }
+          ]
+        },
+        {
+          "pageId": "followup-form-modal",
+          "pageName": "添加跟进",
+          "route": "/followups/new",
+          "layout": "form",
+          "sections": [
+            {
+              "sectionId": "followup-section",
+              "type": "form",
+              "fieldGroups": [
+                {
+                  "groupId": "basic",
+                  "label": "跟进信息",
+                  "fields": [
+                    { "fieldKey": "customer", "label": "客户", "type": "select", "required": true, "searchable": true },
+                    { "fieldKey": "type", "label": "跟进类型", "type": "select", "optionSource": "dict-followup-type", "required": true },
+                    { "fieldKey": "content", "label": "跟进内容", "type": "textarea", "required": true },
+                    { "fieldKey": "attendees", "label": "参与人", "type": "multiselect" },
+                    { "fieldKey": "nextActions", "label": "后续计划", "type": "textarea" }
+                  ]
+                }
+              ]
+            }
+          ],
+          "actions": [
+            { "actionId": "submit", "label": "保存", "type": "primary", "position": "bottom" },
+            { "actionId": "cancel", "label": "取消", "type": "default", "position": "bottom" }
+          ]
+        }
+      ],
+      "typeDefinition": {
+        "entityName": "Followup",
+        "fields": [
+          { "name": "id", "type": "string", "label": "ID", "system": true },
+          { "name": "customerId", "type": "string", "label": "客户ID", "required": true },
+          { "name": "customerName", "type": "string", "label": "客户名称" },
+          { "name": "type", "type": "string", "label": "类型", "enum": "dict-followup-type" },
+          { "name": "content", "type": "string", "label": "内容", "required": true },
+          { "name": "attendees", "type": "string[]", "label": "参与人" },
+          { "name": "nextActions", "type": "string", "label": "后续计划" },
+          { "name": "createdBy", "type": "string", "label": "记录人" },
+          { "name": "createdAt", "type": "datetime", "label": "创建时间", "system": true }
+        ]
+      },
+      "mockDataRequirements": {
+        "count": 50,
+        "fields": ["customerName", "type", "content", "createdAt"]
+      },
+      "filesToGenerate": [
+        "src/app/followups/page.tsx",
+        "src/components/followups/followup-timeline.tsx",
+        "src/components/followups/followup-form.tsx"
+      ]
+    },
+    {
+      "moduleId": "opportunity",
+      "moduleName": "销售机会",
+      "routeBase": "opportunities",
+      "inferred": true,
+      "action": "create",
+      "locked": false,
+      "pages": [
+        {
+          "pageId": "opportunity-list",
+          "pageName": "销售机会",
+          "route": "/opportunities",
+          "layout": "list",
+          "sections": [
+            {
+              "sectionId": "kanban-view",
+              "type": "custom",
+              "component": "KanbanBoard",
+              "description": "销售漏斗看板视图",
+              "stages": [
+                { "value": "prospecting", "label": "线索", "color": "gray" },
+                { "value": "qualification", "label": "资格确认", "color": "blue" },
+                { "value": "proposal", "label": "方案报价", "color": "purple" },
+                { "value": "negotiation", "label": "谈判", "color": "yellow" },
+                { "value": "closed_won", "label": "成交", "color": "green" },
+                { "value": "closed_lost", "label": "失败", "color": "red" }
+              ],
+              "cardFields": [
+                { "fieldKey": "name", "label": "机会名称" },
+                { "fieldKey": "customer", "label": "客户" },
+                { "fieldKey": "amount", "label": "金额", "type": "money" },
+                { "fieldKey": "expectedCloseDate", "label": "预计成交", "type": "date" },
+                { "fieldKey": "owner", "label": "负责人" }
+              ],
+              "actions": [
+                { "actionId": "add-opp", "label": "新建机会", "type": "primary", "position": "top" }
+              ]
+            },
+            {
+              "sectionId": "filters",
+              "type": "form",
+              "fields": [
+                { "fieldKey": "keyword", "label": "关键词", "type": "text" },
+                { "fieldKey": "stage", "label": "阶段", "type": "select", "optionSource": "dict-opportunity-stage" },
+                { "fieldKey": "owner", "label": "负责人", "type": "user" },
+                { "fieldKey": "dateRange", "label": "预计成交时间", "type": "daterange" }
+              ],
+              "actions": [
+                { "actionId": "search", "label": "搜索", "type": "primary" },
+                { "actionId": "reset", "label": "重置", "type": "default" }
+              ]
+            }
+          ]
+        },
+        {
+          "pageId": "opportunity-detail",
+          "pageName": "机会详情",
+          "route": "/opportunities/:id",
+          "layout": "detail",
+          "sections": [
+            {
+              "sectionId": "basic-info",
+              "type": "card",
+              "title": "机会信息",
+              "fields": [
+                { "fieldKey": "name", "label": "机会名称", "type": "text" },
+                { "fieldKey": "customer", "label": "客户", "type": "text", "link": "/customers/:customerId" },
+                { "fieldKey": "stage", "label": "销售阶段", "type": "select", "optionSource": "dict-opportunity-stage" },
+                { "fieldKey": "amount", "label": "预计金额", "type": "money" },
+                { "fieldKey": "probability", "label": "成交概率", "type": "percent" },
+                { "fieldKey": "expectedCloseDate", "label": "预计成交日期", "type": "date" },
+                { "fieldKey": "owner", "label": "负责人", "type": "user" },
+                { "fieldKey": "description", "label": "描述", "type": "textarea" }
+              ]
+            },
+            {
+              "sectionId": "stage-steps",
+              "type": "steps",
+              "title": "销售进度",
+              "steps": [
+                { "value": "prospecting", "label": "线索" },
+                { "value": "qualification", "label": "资格确认" },
+                { "value": "proposal", "label": "方案报价" },
+                { "value": "negotiation", "label": "谈判" },
+                { "value": "closed_won", "label": "成交" }
+              ]
+            },
+            {
+              "sectionId": "tabs",
+              "type": "tabs",
+              "tabs": [
+                {
+                  "tabId": "followups",
+                  "label": "跟进记录",
+                  "sections": [
+                    {
+                      "sectionId": "followup-timeline",
+                      "type": "timeline"
+                    }
+                  ]
+                },
+                {
+                  "tabId": "activities",
+                  "label": "活动记录",
+                  "sections": [
+                    {
+                      "sectionId": "activity-table",
+                      "type": "table"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "actions": [
+            { "actionId": "edit", "label": "编辑", "type": "default" },
+            { "actionId": "convert-contract", "label": "转化为合同", "type": "primary" },
+            { "actionId": "close-won", "label": "成交", "type": "primary" },
+            { "actionId": "close-lost", "label": "失败", "type": "danger" }
+          ]
+        },
+        {
+          "pageId": "opportunity-form",
+          "pageName": "机会表单",
+          "route": "/opportunities/new",
+          "layout": "form",
+          "sections": [
+            {
+              "sectionId": "opp-section",
+              "type": "form",
+              "fieldGroups": [
+                {
+                  "groupId": "basic",
+                  "label": "基本信息",
+                  "fields": [
+                    { "fieldKey": "name", "label": "机会名称", "type": "text", "required": true },
+                    { "fieldKey": "customer", "label": "客户", "type": "select", "required": true, "searchable": true },
+                    { "fieldKey": "stage", "label": "销售阶段", "type": "select", "optionSource": "dict-opportunity-stage", "required": true },
+                    { "fieldKey": "amount", "label": "预计金额", "type": "money", "required": true },
+                    { "fieldKey": "probability", "label": "成交概率", "type": "percent" },
+                    { "fieldKey": "expectedCloseDate", "label": "预计成交日期", "type": "date", "required": true },
+                    { "fieldKey": "owner", "label": "负责人", "type": "user", "required": true },
+                    { "fieldKey": "description", "label": "描述", "type": "textarea" }
+                  ]
+                }
+              ]
+            }
+          ],
+          "actions": [
+            { "actionId": "submit", "label": "保存", "type": "primary" },
+            { "actionId": "cancel", "label": "取消", "type": "default" }
+          ]
+        }
+      ],
+      "typeDefinition": {
+        "entityName": "Opportunity",
+        "fields": [
+          { "name": "id", "type": "string", "label": "ID", "system": true },
+          { "name": "name", "type": "string", "label": "机会名称", "required": true },
+          { "name": "customerId", "type": "string", "label": "客户ID", "required": true },
+          { "name": "customerName", "type": "string", "label": "客户名称" },
+          { "name": "stage", "type": "string", "label": "销售阶段", "enum": "dict-opportunity-stage" },
+          { "name": "amount", "type": "number", "label": "预计金额" },
+          { "name": "probability", "type": "number", "label": "成交概率" },
+          { "name": "expectedCloseDate", "type": "date", "label": "预计成交日期" },
+          { "name": "owner", "type": "string", "label": "负责人" },
+          { "name": "description", "type": "string", "label": "描述" },
+          { "name": "createdAt", "type": "datetime", "label": "创建时间", "system": true },
+          { "name": "updatedAt", "type": "datetime", "label": "更新时间", "system": true }
+        ]
+      },
+      "mockDataRequirements": {
+        "count": 30,
+        "fields": ["name", "customerName", "stage", "amount", "expectedCloseDate", "owner"]
+      },
+      "filesToGenerate": [
+        "src/app/opportunities/page.tsx",
+        "src/app/opportunities/[id]/page.tsx",
+        "src/app/opportunities/new/page.tsx",
+        "src/components/opportunities/opportunity-kanban.tsx",
+        "src/components/opportunities/opportunity-form.tsx"
+      ]
+    },
+    {
+      "moduleId": "task",
+      "moduleName": "任务提醒",
+      "routeBase": "tasks",
+      "inferred": true,
+      "action": "create",
+      "locked": false,
+      "pages": [
+        {
+          "pageId": "task-list",
+          "pageName": "任务列表",
+          "route": "/tasks",
+          "layout": "list",
+          "sections": [
+            {
+              "sectionId": "filters",
+              "type": "form",
+              "fields": [
+                { "fieldKey": "keyword", "label": "关键词", "type": "text" },
+                { "fieldKey": "status", "label": "状态", "type": "select", "optionSource": "dict-task-status" },
+                { "fieldKey": "priority", "label": "优先级", "type": "select", "optionSource": "dict-task-priority" },
+                { "fieldKey": "assignee", "label": "负责人", "type": "user" },
+                { "fieldKey": "dueDateRange", "label": "截止时间", "type": "daterange" }
+              ],
+              "actions": [
+                { "actionId": "search", "label": "搜索", "type": "primary" },
+                { "actionId": "reset", "label": "重置", "type": "default" }
+              ]
+            },
+            {
+              "sectionId": "table",
+              "type": "table",
+              "columns": [
+                { "fieldKey": "title", "label": "任务标题", "width": 250 },
+                { "fieldKey": "relatedCustomer", "label": "关联客户", "width": 150, "link": "/customers/:customerId" },
+                { "fieldKey": "priority", "label": "优先级", "width": 80, "optionSource": "dict-task-priority" },
+                { "fieldKey": "status", "label": "状态", "width": 100, "optionSource": "dict-task-status" },
+                { "fieldKey": "dueDate", "label": "截止日期", "width": 120, "type": "date" },
+                { "fieldKey": "assignee", "label": "负责人", "width": 100 },
+                { "fieldKey": "createdAt", "label": "创建时间", "width": 160, "type": "datetime" }
+              ],
+              "actions": [
+                { "actionId": "view", "label": "查看", "type": "link", "position": "row" },
+                { "actionId": "complete", "label": "完成", "type": "success", "position": "row" },
+                { "actionId": "delete", "label": "删除", "type": "danger", "position": "row" }
+              ],
+              "rowActions": [
+                { "actionId": "mark-done", "label": "标记完成", "type": "success" }
+              ],
+              "pagination": true
+            }
+          ],
+          "actions": [
+            { "actionId": "add-task", "label": "新建任务", "type": "primary", "position": "top" }
+          ]
+        },
+        {
+          "pageId": "task-detail",
+          "pageName": "任务详情",
+          "route": "/tasks/:id",
+          "layout": "detail",
+          "sections": [
+            {
+              "sectionId": "basic-info",
+              "type": "card",
+              "title": "任务信息",
+              "fields": [
+                { "fieldKey": "title", "label": "任务标题", "type": "text" },
+                { "fieldKey": "description", "label": "任务描述", "type": "textarea" },
+                { "fieldKey": "relatedCustomer", "label": "关联客户", "type": "text", "link": "/customers/:customerId" },
+                { "fieldKey": "relatedOpportunity", "label": "关联商机", "type": "text", "link": "/opportunities/:opportunityId" },
+                { "fieldKey": "priority", "label": "优先级", "type": "select", "optionSource": "dict-task-priority" },
+                { "fieldKey": "status", "label": "状态", "type": "select", "optionSource": "dict-task-status" },
+                { "fieldKey": "dueDate", "label": "截止日期", "type": "date" },
+                { "fieldKey": "assignee", "label": "负责人", "type": "user" },
+                { "fieldKey": "createdAt", "label": "创建时间", "type": "datetime", "readonly": true }
+              ]
+            }
+          ],
+          "actions": [
+            { "actionId": "edit", "label": "编辑", "type": "default" },
+            { "actionId": "complete", "label": "标记完成", "type": "success" },
+            { "actionId": "delete", "label": "删除", "type": "danger" }
+          ]
+        },
+        {
+          "pageId": "task-form",
+          "pageName": "任务表单",
+          "route": "/tasks/new",
+          "layout": "form",
+          "sections": [
+            {
+              "sectionId": "task-section",
+              "type": "form",
+              "fieldGroups": [
+                {
+                  "groupId": "basic",
+                  "label": "任务信息",
+                  "fields": [
+                    { "fieldKey": "title", "label": "任务标题", "type": "text", "required": true },
+                    { "fieldKey": "description", "label": "任务描述", "type": "textarea" },
+                    { "fieldKey": "relatedCustomer", "label": "关联客户", "type": "select", "searchable": true },
+                    { "fieldKey": "relatedOpportunity", "label": "关联商机", "type": "select", "searchable": true },
+                    { "fieldKey": "priority", "label": "优先级", "type": "select", "optionSource": "dict-task-priority", "required": true },
+                    { "fieldKey": "dueDate", "label": "截止日期", "type": "date", "required": true },
+                    { "fieldKey": "assignee", "label": "负责人", "type": "user", "required": true }
+                  ]
+                }
+              ]
+            }
+          ],
+          "actions": [
+            { "actionId": "submit", "label": "保存", "type": "primary" },
+            { "actionId": "cancel", "label": "取消", "type": "default" }
+          ]
+        }
+      ],
+      "typeDefinition": {
+        "entityName": "Task",
+        "fields": [
+          { "name": "id", "type": "string", "label": "ID", "system": true },
+          { "name": "title", "type": "string", "label": "任务标题", "required": true },
+          { "name": "description", "type": "string", "label": "任务描述" },
+          { "name": "customerId", "type": "string", "label": "关联客户ID" },
+          { "name": "customerName", "type": "string", "label": "关联客户" },
+          { "name": "opportunityId", "type": "string", "label": "关联商机ID" },
+          { "name": "opportunityName", "type": "string", "label": "关联商机" },
+          { "name": "priority", "type": "string", "label": "优先级", "enum": "dict-task-priority" },
+          { "name": "status", "type": "string", "label": "状态", "enum": "dict-task-status" },
+          { "name": "dueDate", "type": "date", "label": "截止日期" },
+          { "name": "assignee", "type": "string", "label": "负责人" },
+          { "name": "createdAt", "type": "datetime", "label": "创建时间", "system": true },
+          { "name": "updatedAt", "type": "datetime", "label": "更新时间", "system": true }
+        ]
+      },
+      "mockDataRequirements": {
+        "count": 25,
+        "fields": ["title", "customerName", "priority", "status", "dueDate", "assignee"]
+      },
+      "filesToGenerate": [
+        "src/app/tasks/page.tsx",
+        "src/app/tasks/[id]/page.tsx",
+        "src/app/tasks/new/page.tsx",
+        "src/components/tasks/task-table.tsx",
+        "src/components/tasks/task-form.tsx"
+      ]
+    }
+  ],
+  "dashboard": {
+    "dashboardId": "main-dashboard",
+    "dashboardName": "CRM 概览",
+    "route": "/dashboard",
+    "layout": "dashboard",
+    "sections": [
+      {
+        "sectionId": "stat-cards",
+        "type": "statistic",
+        "title": "数据概览",
+        "cards": [
+          {
+            "cardId": "total-customers",
+            "title": "总客户数",
+            "valueField": "totalCustomers",
+            "trendField": "customersGrowth",
+            "icon": "Users",
+            "color": "blue"
+          },
+          {
+            "cardId": "total-opportunities",
+            "title": "销售机会",
+            "valueField": "totalOpportunities",
+            "trendField": "opportunitiesGrowth",
+            "icon": "TrendingUp",
+            "color": "green"
+          },
+          {
+            "cardId": "pipeline-value",
+            "title": "销售漏斗金额",
+            "valueField": "pipelineValue",
+            "format": "money",
+            "icon": "DollarSign",
+            "color": "purple"
+          },
+          {
+            "cardId": "pending-tasks",
+            "title": "待办任务",
+            "valueField": "pendingTasks",
+            "trendField": "tasksChange",
+            "icon": "CheckSquare",
+            "color": "orange"
+          }
+        ]
+      },
+      {
+        "sectionId": "chart-section",
+        "type": "chart",
+        "title": "销售漏斗",
+        "charts": [
+          {
+            "chartId": "pipeline-funnel",
+            "title": "销售阶段分布",
+            "chartType": "bar",
+            "dataSource": "opportunity",
+            "xField": "stage",
+            "yField": "count",
+            "colorField": "stage"
+          },
+          {
+            "chartId": "monthly-sales",
+            "title": "月度销售趋势",
+            "chartType": "line",
+            "dataSource": "opportunity",
+            "xField": "month",
+            "yField": "amount",
+            "aggregation": "sum"
+          },
+          {
+            "chartId": "customer-industry",
+            "title": "客户行业分布",
+            "chartType": "pie",
+            "dataSource": "customer",
+            "valueField": "count",
+            "categoryField": "industry"
+          }
+        ]
+      },
+      {
+        "sectionId": "todo-list",
+        "type": "table",
+        "title": "待办提醒",
+        "columns": [
+          { "fieldKey": "title", "label": "任务", "width": 200 },
+          { "fieldKey": "type", "label": "类型", "width": 100 },
+          { "fieldKey": "related", "label": "关联对象", "width": 150 },
+          { "fieldKey": "dueDate", "label": "截止时间", "width": 120, "type": "date" },
+          { "fieldKey": "priority", "label": "优先级", "width": 80 }
+        ],
+        "limit": 5,
+        "actions": [
+          { "actionId": "view-all", "label": "查看全部", "type": "link", "position": "top-right" }
+        ]
+      },
+      {
+        "sectionId": "recent-followups",
+        "type": "table",
+        "title": "最近跟进",
+        "columns": [
+          { "fieldKey": "customer", "label": "客户", "width": 150 },
+          { "fieldKey": "type", "label": "类型", "width": 100 },
+          { "fieldKey": "content", "label": "内容摘要", "width": 300 },
+          { "fieldKey": "createdAt", "label": "时间", "width": 160, "type": "datetime" }
+        ],
+        "limit": 5,
+        "actions": [
+          { "actionId": "view-all", "label": "查看全部", "type": "link", "position": "top-right" }
+        ]
+      },
+      {
+        "sectionId": "top-opportunities",
+        "type": "table",
+        "title": "高价值机会",
+        "columns": [
+          { "fieldKey": "name", "label": "机会名称", "width": 200 },
+          { "fieldKey": "customer", "label": "客户", "width": 150 },
+          { "fieldKey": "stage", "label": "阶段", "width": 100 },
+          { "fieldKey": "amount", "label": "金额", "width": 120, "type": "money" },
+          { "fieldKey": "expectedCloseDate", "label": "预计成交", "width": 120, "type": "date" }
+        ],
+        "limit": 5,
+        "actions": [
+          { "actionId": "view-all", "label": "查看全部", "type": "link", "position": "top-right" }
+        ]
+      }
+    ]
+  }
+}

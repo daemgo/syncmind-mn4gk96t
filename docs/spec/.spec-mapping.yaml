@@ -1,0 +1,135 @@
+# CRM Application Specification Mapping
+# Generated: 2026-03-27
+# Spec Hash: crm-dialog-20260327
+
+meta:
+  specVersion: "1.0"
+  specHash: "crm-dialog-20260327"
+  generatedAt: "2026-03-27T12:55:00Z"
+  sourceMode: "dialog"
+  totalFiles: 89
+  buildStatus: "success"
+
+modules:
+  - id: customer
+    name: "客户管理"
+    routeBase: "customers"
+    pages:
+      - route: "/customers"
+        file: "src/app/customers/page.tsx"
+        status: "exists"
+      - route: "/crm/customers"
+        file: "src/app/crm/customers/page.tsx"
+        status: "exists"
+      - route: "/crm/customers/[id]"
+        file: "src/app/crm/customers/[id]/page.tsx"
+        status: "exists"
+    components:
+      - "src/components/customer/customer-table.tsx"
+      - "src/components/customer/customer-form.tsx"
+      - "src/components/customer/customer-detail.tsx"
+
+  - id: followup
+    name: "跟进记录"
+    routeBase: "followups"
+    pages:
+      - route: "/followups"
+        file: "src/app/followups/page.tsx"
+        status: "exists"
+    components:
+      - "src/components/followup/followup-timeline.tsx"
+      - "src/components/followup/followup-form.tsx"
+      - "src/components/followup/followup-list.tsx"
+
+  - id: opportunity
+    name: "销售机会"
+    routeBase: "opportunities"
+    pages:
+      - route: "/opportunities"
+        file: "src/app/opportunities/page.tsx"
+        status: "exists"
+    components:
+      - "src/components/opportunity/opportunity-kanban.tsx"
+      - "src/components/opportunity/opportunity-card.tsx"
+
+  - id: task
+    name: "任务提醒"
+    routeBase: "tasks"
+    pages:
+      - route: "/tasks"
+        file: "src/app/tasks/page.tsx"
+        status: "exists"
+    components:
+      - "src/components/task/task-table.tsx"
+      - "src/components/task/task-form.tsx"
+
+  - id: dashboard
+    name: "概览"
+    routeBase: "/"
+    pages:
+      - route: "/"
+        file: "src/app/page.tsx"
+        status: "exists"
+
+types:
+  - "src/types/customer.ts"
+  - "src/types/followup.ts"
+  - "src/types/opportunity.ts"
+  - "src/types/task.ts"
+
+uiComponents:
+  - "src/components/ui/button.tsx"
+  - "src/components/ui/input.tsx"
+  - "src/components/ui/label.tsx"
+  - "src/components/ui/select.tsx"
+  - "src/components/ui/table.tsx"
+  - "src/components/ui/card.tsx"
+  - "src/components/ui/badge.tsx"
+  - "src/components/ui/dialog.tsx"
+  - "src/components/ui/scroll-area.tsx"
+  - "src/components/ui/dropdown-menu.tsx"
+  - "src/components/ui/avatar.tsx"
+  - "src/components/ui/separator.tsx"
+  - "src/components/ui/tabs.tsx"
+
+dependencies:
+  installed:
+    - "@dnd-kit/core@6.3.1"
+    - "@dnd-kit/sortable@10.0.0"
+    - "@dnd-kit/utilities@3.2.2"
+
+issues:
+  - type: "type_import"
+    file: "src/components/followup/followup-form.tsx"
+    issue: "FollowupType imported from wrong path"
+    status: "fixed"
+  - type: "icon_import"
+    file: "src/components/followup/followup-list.tsx"
+    issue: "MoreHorizontal icon not imported"
+    status: "fixed"
+  - type: "api_usage"
+    file: "src/components/opportunity/opportunity-card.tsx"
+    issue: "DateStringFormat should be DateTimeFormat"
+    status: "fixed"
+
+build:
+  status: "success"
+  command: "pnpm build"
+  output:
+    static:
+      - "/"
+      - "/_not-found"
+      - "/crm/customers"
+      - "/customers"
+      - "/followups"
+      - "/opportunities"
+      - "/preview"
+      - "/preview/dashboard"
+      - "/preview/list-page"
+      - "/tasks"
+    dynamic:
+      - "/crm/customers/[id]"
+
+notes: |
+  All core pages are present and compiled successfully.
+  Fixed 3 type/import errors during build verification.
